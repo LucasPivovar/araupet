@@ -59,32 +59,41 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
 
   return (
     <div className="flex-1 flex flex-col bg-white overflow-hidden select-none relative">
-      {/* iOS Status Bar */}
+      {/* Top Bar / Notch Area */}
       <TopBar showBack={false} transparent={true} darkIcons={true} />
 
-      <div className="px-6 pt-1 pb-4 flex-1 flex flex-col max-w-md mx-auto w-full min-h-0">
-        <div className="flex items-center gap-2.5">
+      <div className="px-6 pt-3 pb-4 flex-1 flex flex-col max-w-md mx-auto w-full min-h-0 overflow-y-auto no-scrollbar">
+        {/* Centered Prefeitura de Araucária with top padding */}
+        <div className="flex items-center justify-center gap-2.5 pt-2 pb-1">
           <img
             src={prefeituraLogo}
             alt="Brasão da Prefeitura de Araucária"
-            className="w-9 h-9 object-contain shrink-0"
+            className="w-8 h-8 object-contain shrink-0"
           />
-          <div>
-            <p className="text-[10px] font-normal text-slate-500">Prefeitura de</p>
-            <h1 className="text-base font-semibold text-slate-800 leading-none tracking-tight">
+          <div className="text-left">
+            <p className="text-[10px] font-normal text-slate-500 leading-tight">Prefeitura de</p>
+            <h1 className="text-sm font-semibold text-slate-800 leading-none tracking-tight">
               Araucária
             </h1>
           </div>
         </div>
 
-        <div className="relative mt-3 mb-3 flex justify-center shrink-0">
-          <div className="absolute inset-x-2 top-4 bottom-3 rounded-[32px] bg-gradient-to-b from-teal-50/90 via-white to-teal-50/70 border border-teal-100/80 shadow-inner" />
-          <div className="absolute left-1 top-10 h-16 w-16 rounded-full border border-teal-100 bg-white/60" />
-          <div className="absolute right-2 bottom-10 h-20 w-20 rounded-full border border-teal-100 bg-white/70" />
+        {/* Card do Cachorro / Gato com ArauPet dentro */}
+        <div className="relative mt-2 mb-3 flex justify-center shrink-0">
+          <div className="absolute inset-x-1 top-0 bottom-0 rounded-[28px] bg-gradient-to-b from-teal-50/90 via-white to-teal-50/70 border border-teal-100/80 shadow-inner" />
+          <div className="absolute left-2 top-8 h-14 w-14 rounded-full border border-teal-100 bg-white/60" />
+          <div className="absolute right-3 bottom-8 h-16 w-16 rounded-full border border-teal-100 bg-white/70" />
+          
+          {/* ArauPet dentro do card */}
+          <div className="absolute top-2.5 z-10 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-xs border border-teal-100/90 shadow-2xs flex items-center gap-1">
+            <span className="text-xs font-bold tracking-tight text-slate-800">Arau</span>
+            <span className="text-xs font-bold tracking-tight text-[#008779]">Pet</span>
+          </div>
+
           <img
             src={loginIllustration}
             alt="Cão e gato com paisagem de Araucária"
-            className="relative w-full max-w-[345px] h-[285px] object-contain"
+            className="relative w-full max-w-[320px] h-[250px] object-contain pt-5"
           />
         </div>
 

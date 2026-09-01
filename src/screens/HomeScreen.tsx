@@ -133,7 +133,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <div className="relative z-10 flex items-center justify-between">
             <div className="max-w-[58%] space-y-2">
               <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-medium tracking-wider bg-white/20 uppercase backdrop-blur-md">
-                TELEMEDICINA PET 24H
+                ArauPet • Telemedicina 24h
               </span>
               <p className="text-xs text-teal-50 font-normal leading-relaxed">
                 Atendimento veterinário gratuito onde você estiver.
