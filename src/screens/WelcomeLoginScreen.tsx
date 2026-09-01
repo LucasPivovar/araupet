@@ -62,9 +62,9 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
       {/* Top Bar / Notch Area */}
       <TopBar showBack={false} transparent={true} darkIcons={true} />
 
-      <div className="px-6 pt-3 pb-4 flex-1 flex flex-col max-w-md mx-auto w-full min-h-0 overflow-y-auto no-scrollbar">
+      <div className="px-6 pt-5 pb-4 flex-1 flex flex-col max-w-md mx-auto w-full min-h-0 overflow-y-auto no-scrollbar">
         {/* Centered Prefeitura de Araucária with top padding */}
-        <div className="flex items-center justify-center gap-2.5 pt-2 pb-1">
+        <div className="flex items-center justify-center gap-2.5 pt-1 pb-2">
           <img
             src={prefeituraLogo}
             alt="Brasão da Prefeitura de Araucária"
@@ -78,19 +78,19 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
           </div>
         </div>
 
-        {/* Card do Cachorro / Gato com Logo ArauPet Grande */}
-        <div className="relative mt-2 mb-3 flex flex-col items-center justify-center shrink-0">
+        {/* Card do Cachorro / Gato com Logo ArauPet em Montserrat */}
+        <div className="relative mt-1 mb-3 flex flex-col items-center justify-center shrink-0">
           <div className="absolute inset-x-1 top-0 bottom-0 rounded-[28px] bg-gradient-to-b from-teal-50/90 via-white to-teal-50/70 border border-teal-100/80 shadow-inner" />
           <div className="absolute left-2 top-10 h-14 w-14 rounded-full border border-teal-100 bg-white/60" />
           <div className="absolute right-3 bottom-6 h-16 w-16 rounded-full border border-teal-100 bg-white/70" />
           
-          {/* Logo ArauPet Grande, junto e mais pra baixo */}
-          <div className="relative z-10 pt-6 pb-1 flex flex-col items-center justify-center text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-none inline-flex items-center justify-center">
+          {/* Logo ArauPet em Montserrat Grande e posicionado mais pra baixo */}
+          <div className="relative z-10 pt-9 pb-1 flex flex-col items-center justify-center text-center">
+            <h2 className="text-3xl sm:text-4xl font-extrabold font-montserrat tracking-tight leading-none inline-flex items-center justify-center">
               <span className="text-slate-800">Arau</span>
               <span className="text-[#008779]">Pet</span>
             </h2>
-            <p className="text-[11px] font-medium text-slate-400 tracking-wider uppercase mt-1">
+            <p className="text-[10px] font-semibold font-montserrat text-slate-400 tracking-widest uppercase mt-1">
               Saúde & Bem-Estar Animal
             </p>
           </div>
@@ -98,7 +98,7 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
           <img
             src={loginIllustration}
             alt="Cão e gato com paisagem de Araucária"
-            className="relative w-full max-w-[310px] h-[215px] object-contain"
+            className="relative w-full max-w-[300px] h-[200px] object-contain mt-1"
           />
         </div>
 

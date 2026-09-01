@@ -78,17 +78,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
   return (
     <div className="flex-1 flex flex-col bg-[#f8fafc] overflow-y-auto custom-scrollbar">
-      {/* Top Bar */}
-      <TopBar
-        showBack={false}
-        transparent={true}
-        darkIcons={true}
-      />
-
-      {/* Main Container */}
-      <div className="px-5 pb-6 space-y-4">
+      {/* Main Container with top safe padding */}
+      <div className="px-5 pt-6 pb-6 space-y-4">
         {/* User Greeting Header */}
-        <div className="flex items-center justify-between pt-1">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="relative">
               <img
