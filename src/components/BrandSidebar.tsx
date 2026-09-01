@@ -144,7 +144,7 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
       </div>
 
       {/* Footer Official Seal */}
-      <div className="pt-6 border-t border-slate-200/80 space-y-3">
+      <div className="pt-6 border-t border-slate-200/80">
         <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
           {/* Brasão Oficial Araucária */}
           <div className="w-10 h-10 rounded-lg bg-amber-50 border border-amber-200/80 flex items-center justify-center shrink-0 shadow-xs">
@@ -154,11 +154,6 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
             <p className="text-[10px] font-normal text-slate-500">Uma iniciativa da</p>
             <p className="text-xs font-semibold text-slate-800 tracking-tight">Prefeitura de Araucária</p>
           </div>
-        </div>
-
-        <div className="flex items-center justify-center gap-1.5 text-center text-[11px] font-normal text-slate-500">
-          <span>Bem-estar animal é responsabilidade de todos.</span>
-          <Heart className="w-3.5 h-3.5 text-[#008779] fill-current shrink-0 inline" />
         </div>
       </div>
     </aside>

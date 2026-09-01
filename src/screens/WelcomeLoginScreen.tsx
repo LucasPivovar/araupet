@@ -192,11 +192,6 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
               <UserPlus className="w-4 h-4" />
               <span>Criar nova conta</span>
             </button>
-
-            <div className="flex items-center justify-center gap-1.5 text-center text-xs font-normal text-slate-500">
-              <span>Bem-estar animal é responsabilidade de todos.</span>
-              <Heart className="w-3.5 h-3.5 text-[#008779] fill-current shrink-0 inline" />
-            </div>
           </div>
         </div>
       </div>
