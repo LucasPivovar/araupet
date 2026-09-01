@@ -21,10 +21,10 @@ export const TopBar: React.FC<TopBarProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`w-full shrink-0 z-10 transition-colors ${transparent ? 'bg-transparent' : 'bg-white border-b border-slate-100/80'} ${className}`}>
+    <div className={`w-full shrink-0 z-10 transition-colors pt-3.5 ${transparent ? 'bg-transparent' : 'bg-white border-b border-slate-100/80'} ${className}`}>
       {/* Screen Title Bar */}
       {(title || showBack || rightAction) && (
-        <div className="flex items-center justify-between px-4 py-3 min-h-[48px]">
+        <div className="flex items-center justify-between px-4 py-2 min-h-[46px]">
           <div className="w-9 flex items-center justify-start">
             {showBack && onBack && (
               <button
