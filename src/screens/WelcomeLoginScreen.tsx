@@ -78,22 +78,31 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
           </div>
         </div>
 
-        {/* Card do Cachorro / Gato com ArauPet dentro */}
-        <div className="relative mt-2 mb-3 flex justify-center shrink-0">
+        {/* Card do Cachorro / Gato com Logo ArauPet Grande */}
+        <div className="relative mt-2 mb-3 flex flex-col items-center justify-center shrink-0">
           <div className="absolute inset-x-1 top-0 bottom-0 rounded-[28px] bg-gradient-to-b from-teal-50/90 via-white to-teal-50/70 border border-teal-100/80 shadow-inner" />
-          <div className="absolute left-2 top-8 h-14 w-14 rounded-full border border-teal-100 bg-white/60" />
-          <div className="absolute right-3 bottom-8 h-16 w-16 rounded-full border border-teal-100 bg-white/70" />
+          <div className="absolute left-2 top-10 h-14 w-14 rounded-full border border-teal-100 bg-white/60" />
+          <div className="absolute right-3 bottom-6 h-16 w-16 rounded-full border border-teal-100 bg-white/70" />
           
-          {/* ArauPet dentro do card */}
-          <div className="absolute top-2.5 z-10 px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-xs border border-teal-100/90 shadow-2xs flex items-center gap-1">
-            <span className="text-xs font-bold tracking-tight text-slate-800">Arau</span>
-            <span className="text-xs font-bold tracking-tight text-[#008779]">Pet</span>
+          {/* Logo ArauPet Grande (sem pill) */}
+          <div className="relative z-10 pt-3 flex flex-col items-center justify-center text-center">
+            <div className="flex items-center gap-1">
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-800 leading-none">
+                Arau
+              </span>
+              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#008779] leading-none">
+                Pet
+              </span>
+            </div>
+            <p className="text-[10px] font-medium text-slate-400 tracking-wider uppercase mt-0.5">
+              Saúde & Bem-Estar Animal
+            </p>
           </div>
 
           <img
             src={loginIllustration}
             alt="Cão e gato com paisagem de Araucária"
-            className="relative w-full max-w-[320px] h-[250px] object-contain pt-5"
+            className="relative w-full max-w-[315px] h-[225px] object-contain -mt-1"
           />
         </div>
 
