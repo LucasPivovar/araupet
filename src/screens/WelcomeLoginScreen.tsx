@@ -84,17 +84,13 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
           <div className="absolute left-2 top-10 h-14 w-14 rounded-full border border-teal-100 bg-white/60" />
           <div className="absolute right-3 bottom-6 h-16 w-16 rounded-full border border-teal-100 bg-white/70" />
           
-          {/* Logo ArauPet Grande (sem pill) */}
-          <div className="relative z-10 pt-3 flex flex-col items-center justify-center text-center">
-            <div className="flex items-center gap-1">
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-800 leading-none">
-                Arau
-              </span>
-              <span className="text-2xl sm:text-3xl font-bold tracking-tight text-[#008779] leading-none">
-                Pet
-              </span>
-            </div>
-            <p className="text-[10px] font-medium text-slate-400 tracking-wider uppercase mt-0.5">
+          {/* Logo ArauPet Grande, junto e mais pra baixo */}
+          <div className="relative z-10 pt-6 pb-1 flex flex-col items-center justify-center text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-none inline-flex items-center justify-center">
+              <span className="text-slate-800">Arau</span>
+              <span className="text-[#008779]">Pet</span>
+            </h2>
+            <p className="text-[11px] font-medium text-slate-400 tracking-wider uppercase mt-1">
               Saúde & Bem-Estar Animal
             </p>
           </div>
@@ -102,7 +98,7 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
           <img
             src={loginIllustration}
             alt="Cão e gato com paisagem de Araucária"
-            className="relative w-full max-w-[315px] h-[225px] object-contain -mt-1"
+            className="relative w-full max-w-[310px] h-[215px] object-contain"
           />
         </div>
 
