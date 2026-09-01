@@ -1,4 +1,4 @@
-﻿import { Pet, CampaignLocation, LostFoundPet, Partner, AlertNotification } from '../types';
+import { Pet, CampaignLocation, LostFoundPet, Partner, AlertNotification } from '../types';
 
 export const CURRENT_USER = {
   name: 'Juliana R. S. Lima',
@@ -186,32 +186,32 @@ export const LOST_FOUND_PETS: LostFoundPet[] = [
     name: 'Thor',
     type: 'desaparecido',
     species: 'Cachorro',
-    breed: 'SRD',
+    breed: 'Golden Retriever Mix',
     gender: 'Macho',
-    date: 'Desapareceu em 19/05',
-    location: 'Rua das Flores, Iguaçu',
-    distance: '1,4 km',
-    photo: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&auto=format&fit=crop&q=80',
-    description: 'Thor usa coleira azul, atende pelo nome e tem mancha branca no peito. Muito dócil.',
+    date: 'Desapareceu hoje às 08h',
+    location: 'Rua das Flores, Bairro Iguaçu',
+    distance: '1,4 km de você',
+    photo: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=500&auto=format&fit=crop&q=80',
+    description: 'Thor usa coleira azul com pingente, é dócil, atende pelo nome e tem mancha branca no peito.',
     contactPhone: '(41) 99876-5432',
-    lat: -25.592,
-    lng: -49.408
+    lat: -25.5925,
+    lng: -49.4080
   },
   {
     id: 'lf-2',
-    name: 'Mel',
+    name: 'Melinda',
     type: 'encontrado',
     species: 'Cachorra',
-    breed: 'SRD',
+    breed: 'SRD Caramelo',
     gender: 'Fêmea',
-    date: 'Encontrada em 18/05',
-    location: 'Rua Ceará, Centro',
-    distance: '2,1 km',
-    photo: 'https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?w=400&auto=format&fit=crop&q=80',
-    description: 'Encontrada acolhida temporariamente na Rua Ceará próximo à panificadora. Porte médio, dócil.',
+    date: 'Encontrada ontem às 17h',
+    location: 'Rua Ceará, Centro de Araucária',
+    distance: '2,1 km de você',
+    photo: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=500&auto=format&fit=crop&q=80',
+    description: 'Acolhida temporariamente na Rua Ceará próximo à panificadora. Muito dócil, porte médio.',
     contactPhone: '(41) 98765-4321',
-    lat: -25.588,
-    lng: -49.401
+    lat: -25.5880,
+    lng: -49.4015
   },
   {
     id: 'lf-3',
@@ -221,13 +221,45 @@ export const LOST_FOUND_PETS: LostFoundPet[] = [
     breed: 'Schnauzer Mix',
     gender: 'Macho',
     date: 'Desapareceu em 17/05',
-    location: 'Bairro Fazenda Velha',
-    distance: '3,2 km',
-    photo: 'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=400&auto=format&fit=crop&q=80',
-    description: 'Idoso, pelagem cinza, precisa de medicação contínua para os olhos.',
+    location: 'Av. das Araucárias, Fazenda Velha',
+    distance: '3,2 km de você',
+    photo: 'https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?w=500&auto=format&fit=crop&q=80',
+    description: 'Idoso, pelagem cinza, precisa de colírio contínuo. Possui microchip cadastrado na Prefeitura.',
     contactPhone: '(41) 99123-4567',
-    lat: -25.578,
-    lng: -49.390
+    lat: -25.5780,
+    lng: -49.3900
+  },
+  {
+    id: 'lf-4',
+    name: 'Luna',
+    type: 'desaparecido',
+    species: 'Gata',
+    breed: 'Siamês Mix',
+    gender: 'Fêmea',
+    date: 'Desapareceu há 2 dias',
+    location: 'Próximo ao Parque Cachoeira',
+    distance: '1,8 km de você',
+    photo: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=500&auto=format&fit=crop&q=80',
+    description: 'Olhos azuis, coleira rosa com guizo. Arisca com estranhos, miado fino.',
+    contactPhone: '(41) 99654-3210',
+    lat: -25.5840,
+    lng: -49.3970
+  },
+  {
+    id: 'lf-5',
+    name: 'Bob',
+    type: 'encontrado',
+    species: 'Cachorro',
+    breed: 'Poodle Mix',
+    gender: 'Macho',
+    date: 'Encontrado hoje cedo',
+    location: 'Rua Pedro de Alcântara, Costeira',
+    distance: '4,0 km de você',
+    photo: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=500&auto=format&fit=crop&q=80',
+    description: 'Pelagem branca encaracolada, tosa recente. Encontrado na calçada da USF Costeira.',
+    contactPhone: '(41) 98899-7766',
+    lat: -25.6120,
+    lng: -49.3850
   }
 ];
 
@@ -236,109 +268,128 @@ export const PARTNERS: Partner[] = [
     id: 'partner-1',
     name: 'Vet Center Araucária',
     category: 'clinica',
-    categoryLabel: 'Clínica Veterinária',
+    categoryLabel: 'Clínica & Hospital 24h',
     distance: '1,1 km',
     discount: '10% OFF',
-    discountTarget: 'consultas',
+    discountTarget: 'consultas e exames',
     logo: '🏥',
-    address: 'Av. Victor do Amaral, 1420 - Centro',
+    image: 'https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?w=600&auto=format&fit=crop&q=80',
+    address: 'Av. Victor do Amaral, 1420 - Centro, Araucária',
     phone: '(41) 3642-1000',
     rating: 4.9,
-    benefits: ['10% em consultas clínicas', '5% em cirurgias eletivas', 'Plantão 24h']
+    benefits: ['10% em consultas clínicas', '5% em cirurgias eletivas', 'Plantão emergencial 24h']
   },
   {
     id: 'partner-2',
-    name: 'Pet Show',
+    name: 'Pet Show Araucária',
     category: 'petshop',
-    categoryLabel: 'Pet Shop',
+    categoryLabel: 'Pet Shop & Rações',
     distance: '1,6 km',
     discount: '5% OFF',
-    discountTarget: 'em ração',
+    discountTarget: 'em ração super premium',
     logo: '🐾',
-    address: 'Rua Manoel Ribas, 412 - Fazenda Velha',
+    image: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=600&auto=format&fit=crop&q=80',
+    address: 'Rua Manoel Ribas, 412 - Fazenda Velha, Araucária',
     phone: '(41) 3643-2200',
     rating: 4.8,
-    benefits: ['5% OFF em todas as rações super premium', 'Entrega grátis acima de R$ 90']
+    benefits: ['5% OFF em rações super premium', 'Entrega grátis em toda Araucária acima de R$ 90', 'Programa de pontos fidelidade']
   },
   {
     id: 'partner-3',
-    name: 'Banho & Cia',
+    name: 'Estúdio Banho & Cia Pet',
     category: 'banho',
-    categoryLabel: 'Banho e Tosa',
+    categoryLabel: 'Centro de Estética Animal',
     distance: '2,2 km',
     discount: '15% OFF',
-    discountTarget: 'no banho',
+    discountTarget: 'no plano mensal',
     logo: '🛁',
-    address: 'Rua São Vicente de Paulo, 890 - Iguaçu',
+    image: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=600&auto=format&fit=crop&q=80',
+    address: 'Rua São Vicente de Paulo, 890 - Iguaçu, Araucária',
     phone: '(41) 3642-8877',
     rating: 4.9,
-    benefits: ['15% OFF no pacote mensal', 'Hidratação de ozônio cortesia na primeira visita']
+    benefits: ['15% OFF no pacote mensal', 'Hidratação com ozônio cortesia na primeira visita', 'Ambiente climatizado e monitorado']
   },
   {
     id: 'partner-4',
-    name: 'FarmaPet',
+    name: 'FarmaPet Araucária',
     category: 'farmacia',
-    categoryLabel: 'Farmácia Veterinária',
+    categoryLabel: 'Farmácia Veterinária & Manipulação',
     distance: '2,4 km',
     discount: '5% OFF',
-    discountTarget: 'medicamentos',
+    discountTarget: 'em antipulgas e remédios',
     logo: '💊',
-    address: 'Rua Agrimensor Carlos Hasselman, 230 - Fazenda Velha',
+    image: 'https://images.unsplash.com/photo-1586015555751-63c29da57d90?w=600&auto=format&fit=crop&q=80',
+    address: 'Rua Agrimensor Carlos Hasselman, 230 - Fazenda Velha, Araucária',
     phone: '(41) 3642-5544',
     rating: 4.7,
-    benefits: ['5% OFF em antipulgas e vermífugos', 'Manipulação com sabores atrativos']
+    benefits: ['5% OFF em antipulgas e vermífugos', 'Fórmulas manipuladas com petiscos palatáveis', 'Desconto para pets castrados no CCZ']
+  },
+  {
+    id: 'partner-5',
+    name: 'Hospital Veterinário Araucária 24h',
+    category: 'clinica',
+    categoryLabel: 'Hospital Veterinário Especializado',
+    distance: '3,1 km',
+    discount: '12% OFF',
+    discountTarget: 'em exames de imagem e raio-X',
+    logo: '🏥',
+    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&auto=format&fit=crop&q=80',
+    address: 'Rodovia do Xisto (BR-476), km 152 - Sabiá, Araucária',
+    phone: '(41) 3642-9900',
+    rating: 4.9,
+    benefits: ['12% OFF em ultrassom e raio-X digital', 'Internação com monitoramento 24h', 'Equipe de especialistas de prontidão']
   }
 ];
 
 export const ALERTS_DATA: AlertNotification[] = [
   {
     id: 'alert-1',
-    title: 'Campanha Antirrábica',
-    description: 'A campanha está acontecendo! Leve seu pet para vacinar.',
+    title: 'Campanha Antirrábica 2025',
+    description: 'A campanha municipal de vacinação começou na USF Iguaçu. Leve a Mel para vacinar!',
     category: 'vacinacao',
-    timeAgo: '08:30',
+    timeAgo: 'Há 15 min',
     isRead: false,
     actionScreen: 'vaccines',
-    iconType: 'paw'
+    iconType: 'vaccine'
   },
   {
     id: 'alert-2',
-    title: 'Consulta concluída',
-    description: 'Resumo de consulta com a Dra. Paola está disponível.',
+    title: 'Consulta veterinária concluída',
+    description: 'O prontuário e orientações da Dra. Paola Silveira já estão disponíveis.',
     category: 'consultas',
-    timeAgo: 'Ontem 14:22',
+    timeAgo: 'Hoje 08:30',
     isRead: false,
     actionScreen: 'telemed',
     iconType: 'stethoscope'
   },
   {
     id: 'alert-3',
-    title: 'Lembrete de vacina',
-    description: 'Não esqueça! Vacina da raiva da Mel vence em 12/09/2025.',
-    category: 'vacinacao',
-    timeAgo: '18/05',
-    isRead: true,
-    actionScreen: 'wallet',
-    iconType: 'vaccine'
+    title: 'Novo pet desaparecido no seu bairro',
+    description: 'Thor desapareceu próximo à Rua das Flores no Iguaçu (1,4 km de você).',
+    category: 'perdidos',
+    timeAgo: 'Hoje 07:45',
+    isRead: false,
+    actionScreen: 'lostfound',
+    iconType: 'location'
   },
   {
     id: 'alert-4',
-    title: 'Novo parceiro',
-    description: 'Pet Show está com 5% OFF em rações. Aproveite!',
+    title: 'Lembrete de dose de reforço',
+    description: 'A vacina de raiva anual da Mel tem previsão para 12/09/2025.',
+    category: 'vacinacao',
+    timeAgo: 'Ontem 14:20',
+    isRead: true,
+    actionScreen: 'wallet',
+    iconType: 'paw'
+  },
+  {
+    id: 'alert-5',
+    title: 'Novo parceiro credenciado no ArauPet',
+    description: 'Pet Show Araucária está oferecendo 5% OFF para todos os usuários cadastrados.',
     category: 'geral',
     timeAgo: '17/05',
     isRead: true,
     actionScreen: 'partners',
     iconType: 'shop'
-  },
-  {
-    id: 'alert-5',
-    title: 'Pet encontrado',
-    description: 'Há um pet que pode ser o seu! Veja no mapa.',
-    category: 'perdidos',
-    timeAgo: '15/05',
-    isRead: true,
-    actionScreen: 'lostfound',
-    iconType: 'location'
   }
 ];

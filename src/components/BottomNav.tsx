@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Home, LayoutGrid, CreditCard, Bell, User } from 'lucide-react';
 import { NavTabId, ScreenId } from '../types';
 
@@ -38,13 +38,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             }`}
           >
             <div className="relative">
-              <Icon className={`w-5 h-5 transition-transform ${isActive ? 'scale-110 stroke-[2.4]' : 'stroke-[1.8]'}`} />
+              <Icon className={`w-5 h-5 transition-transform ${isActive ? 'scale-105 stroke-[2.2]' : 'stroke-[1.8]'}`} />
               {tab.id === 'alertas' && unreadAlertsCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white" />
+                <span className="absolute -top-1.5 -right-2.5 min-w-[17px] h-[17px] px-1 bg-rose-500 text-white text-[9px] font-medium rounded-full flex items-center justify-center ring-2 ring-white leading-none shadow-xs">
+                  {unreadAlertsCount}
+                </span>
               )}
             </div>
             <span className={`text-[10px] mt-1 transition-all ${
-              isActive ? 'font-bold text-[#008779]' : 'font-medium text-slate-500'
+              isActive ? 'font-medium text-[#008779]' : 'font-medium text-slate-500'
             }`}>
               {tab.label}
             </span>

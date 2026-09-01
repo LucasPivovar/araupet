@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { ScreenId, NavTabId } from '../types';
 import { PhoneFrame } from '../components/PhoneFrame';
 import { BottomNav } from '../components/BottomNav';
@@ -96,7 +96,7 @@ export const InteractiveAppView: React.FC<InteractiveAppViewProps> = ({
     { id: 'telemed', label: 'Telemedicina' },
     { id: 'vaccines', label: 'Vacinação' },
     { id: 'adoption', label: 'Adoção' },
-    { id: 'lostfound', label: 'Perdidos' },
+    { id: 'lostfound', label: 'Desaparecidos' },
     { id: 'partners', label: 'Parceiros' },
     { id: 'alerts', label: 'Alertas' },
   ];
@@ -110,7 +110,7 @@ export const InteractiveAppView: React.FC<InteractiveAppViewProps> = ({
             <button
               key={pill.id}
               onClick={() => onNavigate(pill.id)}
-              className={`px-3 py-1 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+              className={`px-3 py-1 rounded-xl text-xs font-medium whitespace-nowrap transition-all ${
                 currentScreen === pill.id
                   ? 'bg-[#008779] text-white shadow-sm'
                   : 'text-slate-400 hover:text-white hover:bg-slate-700/50'
@@ -144,9 +144,9 @@ export const InteractiveAppView: React.FC<InteractiveAppViewProps> = ({
       </div>
 
       {/* Simulator Guidance Info */}
-      <p className="mt-4 text-xs font-medium text-slate-400 flex items-center gap-1.5">
+      <p className="mt-4 text-xs font-normal text-slate-400 flex items-center gap-1.5">
         <Sparkles className="w-3.5 h-3.5 text-[#008779]" />
-        <span>Aplicativo 100% interativo: clique nos botões, abas, agendamentos e chamadas.</span>
+        <span>Aplicativo 100% interativo: clique nos botões, mapa, abas, cupons e chamadas.</span>
       </p>
     </div>
   );

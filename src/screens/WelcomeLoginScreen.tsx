@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import {
   ArrowRight,
   Eye,
@@ -70,8 +70,8 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
             className="w-9 h-9 object-contain shrink-0"
           />
           <div>
-            <p className="text-[10px] font-medium text-slate-500">Prefeitura de</p>
-            <h1 className="text-base font-black text-slate-800 leading-none tracking-tight">
+            <p className="text-[10px] font-normal text-slate-500">Prefeitura de</p>
+            <h1 className="text-base font-semibold text-slate-800 leading-none tracking-tight">
               Araucária
             </h1>
           </div>
@@ -92,7 +92,7 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
         <div className="space-y-3.5 shrink-0">
           <form onSubmit={handleLogin} className="space-y-3">
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-700 block">
+              <label className="text-xs font-medium text-slate-700 block">
                 E-mail ou CPF
               </label>
               <div className="relative flex items-center">
@@ -103,13 +103,13 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="seu.email@exemplo.com ou CPF"
-                  className="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 shadow-xs focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15 transition-all"
+                  className="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 shadow-xs focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15 font-normal transition-all"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-700 block">
+              <label className="text-xs font-medium text-slate-700 block">
                 Senha
               </label>
               <div className="relative flex items-center">
@@ -120,7 +120,7 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Sua senha"
-                  className="w-full pl-10 pr-10 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 shadow-xs focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15 transition-all"
+                  className="w-full pl-10 pr-10 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 shadow-xs focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15 font-normal transition-all"
                 />
                 <button
                   type="button"
@@ -141,13 +141,13 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
                   onChange={(e) => setRememberAccess(e.target.checked)}
                   className="w-4 h-4 rounded text-[#008779] focus:ring-[#008779] accent-[#008779]"
                 />
-                <span className="text-slate-600 font-medium">Lembrar-me</span>
+                <span className="text-slate-600 font-normal">Lembrar-me</span>
               </label>
 
               <button
                 type="button"
                 onClick={() => alert('Instruções de recuperação de senha enviadas ao e-mail cadastrado!')}
-                className="font-bold text-[#008779] hover:underline"
+                className="font-medium text-[#008779] hover:underline"
               >
                 Esqueci minha senha
               </button>
@@ -156,7 +156,7 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-bold text-xs shadow-md shadow-[#008779]/20 transition-all flex items-center justify-center gap-2 active:scale-[0.99]"
+              className="w-full py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-xs shadow-md shadow-[#008779]/20 transition-all flex items-center justify-center gap-2 active:scale-[0.99]"
             >
               {isLoading ? (
                 <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -173,13 +173,13 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
             <button
               type="button"
               onClick={() => setShowRegisterModal(true)}
-              className="w-full py-2.5 bg-teal-50 hover:bg-teal-100/70 text-[#008779] border border-[#008779]/25 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 active:scale-[0.99]"
+              className="w-full py-2.5 bg-teal-50 hover:bg-teal-100/70 text-[#008779] border border-[#008779]/25 rounded-xl font-medium text-xs transition-all flex items-center justify-center gap-2 active:scale-[0.99]"
             >
               <UserPlus className="w-4 h-4" />
               <span>Criar nova conta</span>
             </button>
 
-            <div className="flex items-center justify-center gap-1.5 text-center text-xs font-medium text-slate-600">
+            <div className="flex items-center justify-center gap-1.5 text-center text-xs font-normal text-slate-500">
               <span>Bem-estar animal é responsabilidade de todos.</span>
               <Heart className="w-3.5 h-3.5 text-[#008779] fill-current shrink-0 inline" />
             </div>

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { ScreenId } from '../types';
 import { PhoneFrame } from '../components/PhoneFrame';
 import { BottomNav } from '../components/BottomNav';
@@ -52,7 +52,7 @@ export const DesignGalleryView: React.FC<DesignGalleryViewProps> = ({
     },
     {
       id: 'lostfound' as ScreenId,
-      title: '6. Perdidos & Encontrados',
+      title: '6. Animais Desaparecidos',
       tab: 'servicos' as const,
       component: <LostFoundScreen onBack={() => {}} />,
     },
@@ -77,17 +77,17 @@ export const DesignGalleryView: React.FC<DesignGalleryViewProps> = ({
         <div className="bg-slate-800/80 backdrop-blur-md rounded-3xl p-6 border border-slate-700/60 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-black tracking-wider bg-[#008779] text-white uppercase">
+              <span className="px-3 py-1 rounded-full text-xs font-medium tracking-wider bg-[#008779] text-white uppercase">
                 Design System & Telas Oficiais
               </span>
-              <span className="text-xs text-slate-400 font-semibold">
+              <span className="text-xs text-slate-400 font-normal">
                 8 Telas Fidelidade Pixel-Perfect
               </span>
             </div>
-            <h2 className="text-2xl font-black text-white mt-2">
+            <h2 className="text-2xl font-semibold text-white mt-2">
               Visão Panorâmica do Aplicativo ArauPet
             </h2>
-            <p className="text-sm text-slate-400 mt-1">
+            <p className="text-sm text-slate-400 font-normal mt-1">
               Clique em qualquer tela abaixo para abrir no simulador interativo em tamanho real.
             </p>
           </div>
@@ -95,7 +95,7 @@ export const DesignGalleryView: React.FC<DesignGalleryViewProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => onSelectScreen('home')}
-              className="px-5 py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl text-xs font-bold flex items-center gap-2 shadow-lg shadow-[#008779]/20 transition-all active:scale-95"
+              className="px-5 py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl text-xs font-medium flex items-center gap-2 shadow-lg shadow-[#008779]/20 transition-all active:scale-95"
             >
               <Play className="w-4 h-4 fill-current" />
               Abrir Simulador Interativo
@@ -112,12 +112,12 @@ export const DesignGalleryView: React.FC<DesignGalleryViewProps> = ({
             >
               {/* Screen Title Tag */}
               <div className="mb-3 flex items-center justify-between w-full px-2">
-                <span className="text-xs font-black text-slate-300 group-hover:text-white transition-colors">
+                <span className="text-xs font-medium text-slate-300 group-hover:text-white transition-colors">
                   {s.title}
                 </span>
                 <button
                   onClick={() => onSelectScreen(s.id)}
-                  className="text-[10px] font-bold text-[#008779] hover:text-teal-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1"
+                  className="text-[10px] font-medium text-[#008779] hover:text-teal-300 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1"
                 >
                   <Eye className="w-3 h-3" />
                   Interagir

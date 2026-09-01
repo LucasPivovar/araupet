@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   MoreHorizontal, 
   ShieldCheck, 
@@ -54,18 +54,18 @@ export const PetWalletScreen: React.FC<PetWalletScreenProps> = ({ onBack }) => {
             />
             <div className="space-y-0.5 min-w-0">
               <div className="flex items-center gap-1.5">
-                <h2 className="text-xl font-black truncate">{pet.name}</h2>
-                <span className="text-rose-300 font-bold text-sm">♀</span>
+                <h2 className="text-lg font-semibold truncate">{pet.name}</h2>
+                <span className="text-rose-300 font-medium text-sm">♀</span>
               </div>
-              <p className="text-xs text-teal-100 font-medium">
+              <p className="text-xs text-teal-100 font-normal">
                 {pet.species === 'dog' ? 'Cachorro' : 'Gato'} • {pet.breed}
               </p>
-              <p className="text-xs text-teal-200/80">
+              <p className="text-xs text-teal-200/80 font-normal">
                 {pet.age}
               </p>
-              <p className="text-[11px] text-teal-100/90 pt-0.5">
+              <p className="text-[11px] text-teal-100/90 pt-0.5 font-normal">
                 <span className="opacity-70">Tutor(a) </span>
-                <span className="font-semibold">{pet.tutorName}</span>
+                <span className="font-medium">{pet.tutorName}</span>
               </p>
             </div>
           </div>
@@ -75,24 +75,24 @@ export const PetWalletScreen: React.FC<PetWalletScreenProps> = ({ onBack }) => {
         <div className="p-3.5 rounded-2xl bg-white border border-slate-100 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-700">Situação vacinal</span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-700">
+              <span className="text-xs font-medium text-slate-700">Situação vacinal</span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 text-emerald-700">
                 {pet.vaccinesStatus}
               </span>
             </div>
-            <p className="text-[11px] text-slate-500">
-              Próxima vacina: <span className="font-semibold text-slate-700">{pet.nextVaccine}</span>
+            <p className="text-[11px] text-slate-500 font-normal">
+              Próxima vacina: <span className="font-medium text-slate-700">{pet.nextVaccine}</span>
             </p>
           </div>
 
           <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-            <ShieldCheck className="w-6 h-6 stroke-[2.2]" />
+            <ShieldCheck className="w-6 h-6 stroke-[2]" />
           </div>
         </div>
 
         {/* QR Code da Carteira */}
         <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs flex flex-col items-center justify-center text-center space-y-2.5">
-          <span className="text-xs font-bold text-slate-700">
+          <span className="text-xs font-medium text-slate-700">
             QR Code da Carteira
           </span>
 
@@ -135,27 +135,27 @@ export const PetWalletScreen: React.FC<PetWalletScreenProps> = ({ onBack }) => {
             </svg>
           </div>
 
-          <p className="text-[11px] text-slate-400 max-w-[220px]">
+          <p className="text-[11px] text-slate-400 font-normal max-w-[220px]">
             Apresente este QR Code em atendimentos e serviços.
           </p>
         </div>
 
         {/* Resumo de Saúde (3 columns) */}
         <div className="p-3.5 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-2.5">
-          <h4 className="text-xs font-bold text-slate-700">Resumo de saúde</h4>
+          <h4 className="text-xs font-medium text-slate-700">Resumo de saúde</h4>
           
           <div className="grid grid-cols-3 divide-x divide-slate-100 text-center">
             <div className="px-1 space-y-0.5">
-              <p className="text-[10px] text-slate-400 font-medium">Peso</p>
-              <p className="text-xs font-bold text-slate-800">{pet.weight}</p>
+              <p className="text-[10px] text-slate-400 font-normal">Peso</p>
+              <p className="text-xs font-medium text-slate-800">{pet.weight}</p>
             </div>
             <div className="px-1 space-y-0.5">
-              <p className="text-[10px] text-slate-400 font-medium">Última consulta</p>
-              <p className="text-xs font-bold text-slate-800">{pet.lastVisit}</p>
+              <p className="text-[10px] text-slate-400 font-normal">Última consulta</p>
+              <p className="text-xs font-medium text-slate-800">{pet.lastVisit}</p>
             </div>
             <div className="px-1 space-y-0.5">
-              <p className="text-[10px] text-slate-400 font-medium">Vermifugação</p>
-              <p className="text-xs font-bold text-slate-800">{pet.dewormingDate}</p>
+              <p className="text-[10px] text-slate-400 font-normal">Vermifugação</p>
+              <p className="text-xs font-medium text-slate-800">{pet.dewormingDate}</p>
             </div>
           </div>
         </div>
@@ -163,7 +163,7 @@ export const PetWalletScreen: React.FC<PetWalletScreenProps> = ({ onBack }) => {
         {/* Ver histórico completo link */}
         <button
           onClick={() => setShowHistory(true)}
-          className="w-full py-2.5 text-center text-xs font-bold text-[#008779] hover:text-[#006e63] flex items-center justify-center gap-1 transition-colors"
+          className="w-full py-2.5 text-center text-xs font-medium text-[#008779] hover:text-[#006e63] flex items-center justify-center gap-1 transition-colors"
         >
           <span>Ver histórico completo</span>
           <ChevronRight className="w-3.5 h-3.5" />

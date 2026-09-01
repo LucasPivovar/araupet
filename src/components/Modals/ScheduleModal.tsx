@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { X, Calendar, MapPin, CheckCircle, Clock, PawPrint } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CampaignLocation } from '../../types';
@@ -62,14 +62,14 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
 
         {isSuccess ? (
           <div className="p-6 text-center space-y-4">
-            <div className="w-16 h-16 bg-emerald-100 text-[#008779] rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle className="w-10 h-10" />
+            <div className="w-14 h-14 bg-emerald-100 text-[#008779] rounded-full flex items-center justify-center mx-auto">
+              <CheckCircle className="w-8 h-8" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-lg font-extrabold text-slate-800">
+              <h4 className="text-base font-semibold text-slate-800">
                 Agendamento Confirmado!
               </h4>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-500 font-normal">
                 O comprovante e o QR Code foram salvos na Carteira Digital da <strong>Mel</strong>.
               </p>
             </div>
@@ -77,40 +77,40 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
             <div className="bg-slate-50 rounded-2xl p-3.5 text-left text-xs space-y-1.5 border border-slate-200">
               <div className="flex justify-between">
                 <span className="text-slate-500">Serviço:</span>
-                <span className="font-semibold text-slate-800 uppercase">{type === 'vacinacao' ? 'Vacinação Antirrábica' : 'Castração Gratuita'}</span>
+                <span className="font-medium text-slate-800 uppercase">{type === 'vacinacao' ? 'Vacinação Antirrábica' : 'Castração Gratuita'}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Local:</span>
-                <span className="font-semibold text-slate-800">USF Iguaçu</span>
+                <span className="font-medium text-slate-800">USF Iguaçu</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Horário:</span>
-                <span className="font-semibold text-[#008779]">24 MAI às {selectedTime}</span>
+                <span className="font-medium text-[#008779]">24 MAI às {selectedTime}</span>
               </div>
             </div>
 
             <button
               onClick={resetAndClose}
-              className="w-full py-3 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-bold text-sm shadow-md transition-colors"
+              className="w-full py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-xs shadow-md transition-colors"
             >
               Concluir
             </button>
           </div>
         ) : (
-          <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto custom-scrollbar">
+          <div className="p-5 space-y-3.5 max-h-[70vh] overflow-y-auto custom-scrollbar">
             {/* Service Toggle */}
             <div>
-              <label className="text-xs font-bold text-slate-600 block mb-1.5">
+              <label className="text-xs font-medium text-slate-700 block mb-1.5">
                 Tipo de Atendimento
               </label>
               <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
                 <button
                   type="button"
                   onClick={() => setType('vacinacao')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-all ${
+                  className={`py-1.5 rounded-lg text-xs font-medium transition-all ${
                     type === 'vacinacao'
                       ? 'bg-white text-[#008779] shadow-xs'
-                      : 'text-slate-500'
+                      : 'text-slate-600'
                   }`}
                 >
                   Vacinação
@@ -118,10 +118,10 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setType('castracao')}
-                  className={`py-2 rounded-lg text-xs font-bold transition-all ${
+                  className={`py-1.5 rounded-lg text-xs font-medium transition-all ${
                     type === 'castracao'
                       ? 'bg-white text-[#008779] shadow-xs'
-                      : 'text-slate-500'
+                      : 'text-slate-600'
                   }`}
                 >
                   Castração
@@ -131,7 +131,7 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
 
             {/* Pet Selector */}
             <div>
-              <label className="text-xs font-bold text-slate-600 block mb-1.5">
+              <label className="text-xs font-medium text-slate-700 block mb-1.5">
                 Pet Selecionado
               </label>
               <div className="flex items-center gap-3 p-2.5 rounded-xl border border-teal-200 bg-teal-50/50">
@@ -141,15 +141,15 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
                   className="w-10 h-10 rounded-full object-cover border border-white"
                 />
                 <div>
-                  <h4 className="text-xs font-bold text-slate-800">Mel (Border Collie)</h4>
-                  <p className="text-[10px] text-slate-500">Tutora: Juliana Lima • 18,5 kg</p>
+                  <h4 className="text-xs font-medium text-slate-800">Mel (Border Collie)</h4>
+                  <p className="text-[10px] text-slate-500 font-normal">Tutora: Juliana Lima • 18,5 kg</p>
                 </div>
               </div>
             </div>
 
             {/* Location selector */}
             <div>
-              <label className="text-xs font-bold text-slate-600 block mb-1.5">
+              <label className="text-xs font-medium text-slate-700 block mb-1.5">
                 Escolha a Unidade / Ponto de Ação
               </label>
               <div className="space-y-1.5">
@@ -160,15 +160,15 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
                     onClick={() => setSelectedLocation(loc.id)}
                     className={`w-full p-2.5 rounded-xl text-left border transition-all flex items-center justify-between text-xs ${
                       selectedLocation === loc.id
-                        ? 'border-[#008779] bg-teal-50/60 font-semibold'
+                        ? 'border-[#008779] bg-teal-50/60 font-medium'
                         : 'border-slate-200 hover:border-slate-300'
                     }`}
                   >
                     <div>
-                      <p className="font-bold text-slate-800">{loc.name}</p>
-                      <p className="text-[11px] text-slate-500">{loc.address}</p>
+                      <p className="font-medium text-slate-800">{loc.name}</p>
+                      <p className="text-[11px] text-slate-500 font-normal">{loc.address}</p>
                     </div>
-                    <span className="text-[11px] font-bold text-[#008779] bg-white px-2 py-0.5 rounded-md border border-teal-100">
+                    <span className="text-[11px] font-medium text-[#008779] bg-white px-2 py-0.5 rounded-md border border-teal-100">
                       {loc.dateStr}
                     </span>
                   </button>
@@ -178,7 +178,7 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
 
             {/* Time Slot */}
             <div>
-              <label className="text-xs font-bold text-slate-600 block mb-1.5">
+              <label className="text-xs font-medium text-slate-700 block mb-1.5">
                 Horário Disponível
               </label>
               <div className="grid grid-cols-4 gap-1.5">
@@ -189,7 +189,7 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
                     onClick={() => setSelectedTime(t)}
                     className={`py-1.5 rounded-lg text-xs font-medium border text-center transition-all ${
                       selectedTime === t
-                        ? 'bg-[#008779] border-[#008779] text-white font-bold'
+                        ? 'bg-[#008779] border-[#008779] text-white font-medium'
                         : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
@@ -203,7 +203,7 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
             <button
               type="button"
               onClick={handleConfirm}
-              className="w-full py-3 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-bold text-sm shadow-md transition-colors mt-2"
+              className="w-full py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-xs shadow-md transition-colors mt-2"
             >
               Confirmar Agendamento
             </button>

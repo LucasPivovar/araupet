@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { MapPin, Heart, Sparkles, Smartphone, Grid, Download } from 'lucide-react';
 import { ScreenId } from '../types';
 
@@ -21,7 +21,7 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
     { id: 'telemed', label: '3. Veterinário 24h', icon: '🩺' },
     { id: 'vaccines', label: '4. Vacinação & Castração', icon: '💉' },
     { id: 'adoption', label: '5. Adoção Responsável', icon: '🐶' },
-    { id: 'lostfound', label: '6. Perdidos & Encontrados', icon: '🗺️' },
+    { id: 'lostfound', label: '6. Desaparecidos', icon: '🗺️' },
     { id: 'partners', label: '7. Parceiros & Benefícios', icon: '🏷️' },
     { id: 'alerts', label: '8. Alertas & Notificações', icon: '🔔' },
   ];
@@ -40,27 +40,27 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="text-2xl font-black tracking-tight text-[#0f172a]">Arau</span>
-              <span className="text-2xl font-black tracking-tight text-[#008779]">Pet</span>
+              <span className="text-2xl font-bold tracking-tight text-[#0f172a]">Arau</span>
+              <span className="text-2xl font-bold tracking-tight text-[#008779]">Pet</span>
             </div>
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
+            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">
               Sistema de Saúde Animal
             </p>
           </div>
         </div>
 
         {/* Slogans */}
-        <div className="space-y-1.5 pl-1 border-l-2 border-[#008779]/30">
-          <p className="text-lg font-bold text-slate-700 leading-snug">
+        <div className="space-y-1 pl-1 border-l-2 border-[#008779]/30">
+          <p className="text-base font-medium text-slate-700 leading-snug">
             Cuidado que vira carinho.
           </p>
-          <p className="text-lg font-extrabold text-[#008779] leading-snug">
+          <p className="text-base font-semibold text-[#008779] leading-snug">
             Cidade que cuida.
           </p>
         </div>
 
         {/* Location Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-200/60 text-[#008779] text-xs font-semibold">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-200/60 text-[#008779] text-xs font-medium">
           <MapPin className="w-3.5 h-3.5" />
           <span>Araucária – PR</span>
         </div>
@@ -69,7 +69,7 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
         <div className="p-1 bg-slate-100 rounded-xl border border-slate-200 flex gap-1">
           <button
             onClick={() => onToggleViewMode('simulator')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-medium transition-all ${
               viewMode === 'simulator'
                 ? 'bg-white text-[#008779] shadow-sm'
                 : 'text-slate-500 hover:text-slate-800'
@@ -80,7 +80,7 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
           </button>
           <button
             onClick={() => onToggleViewMode('gallery')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-medium transition-all ${
               viewMode === 'gallery'
                 ? 'bg-[#008779] text-white shadow-sm'
                 : 'text-slate-500 hover:text-slate-800'
@@ -93,7 +93,7 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
 
         {/* Screen Navigator (for quick jumping) */}
         <div className="space-y-1.5">
-          <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-1">
+          <label className="text-[11px] font-medium text-slate-400 uppercase tracking-wider px-1">
             Navegação Direta no App
           </label>
           <div className="grid grid-cols-1 gap-1">
@@ -108,7 +108,7 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
                   }}
                   className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium flex items-center justify-between transition-all ${
                     active
-                      ? 'bg-teal-50 border border-teal-200 text-[#008779] font-bold shadow-xs'
+                      ? 'bg-teal-50 border border-teal-200 text-[#008779] font-medium shadow-xs'
                       : 'text-slate-600 hover:bg-slate-50'
                   }`}
                 >
@@ -137,7 +137,7 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
               <path d="M12 2c-.55 0-1 .45-1 1v1.1c-1.57.34-3 1.15-4.14 2.29-.44-.39-.99-.69-1.61-.83-.49-.11-.98-.05-1.39.17-.41.21-.69.58-.8 1.05-.11.49-.03 1 .22 1.41.25.42.66.72 1.15.83.62.14 1.25.07 1.81-.19C6.46 9.8 6 11.85 6 14c0 3.31 2.69 6 6 6s6-2.69 6-6c0-2.15-.46-4.2-1.24-5.07.56.26 1.19.33 1.81.19.49-.11.9-.41 1.15-.83.25-.41.33-.92.22-1.41-.11-.47-.39-.84-.8-1.05-.41-.22-.9-.28-1.39-.17-.62.14-1.17.44-1.61.83C15 4.25 13.57 3.44 12 3.1V3c0-.55-.45-1-1-1z" />
             </svg>
           </div>
-          <p className="text-[11px] font-semibold text-teal-800">
+          <p className="text-[11px] font-medium text-teal-800">
             Parque Cachoeira & Unidades de Saúde
           </p>
         </div>
@@ -151,12 +151,12 @@ export const BrandSidebar: React.FC<BrandSidebarProps> = ({
             <span className="text-xl">🏛️</span>
           </div>
           <div>
-            <p className="text-[10px] font-medium text-slate-500">Uma iniciativa da</p>
-            <p className="text-xs font-black text-slate-800 tracking-tight">Prefeitura de Araucária</p>
+            <p className="text-[10px] font-normal text-slate-500">Uma iniciativa da</p>
+            <p className="text-xs font-semibold text-slate-800 tracking-tight">Prefeitura de Araucária</p>
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-1.5 text-center text-[11px] font-medium text-slate-500">
+        <div className="flex items-center justify-center gap-1.5 text-center text-[11px] font-normal text-slate-500">
           <span>Bem-estar animal é responsabilidade de todos.</span>
           <Heart className="w-3.5 h-3.5 text-[#008779] fill-current shrink-0 inline" />
         </div>

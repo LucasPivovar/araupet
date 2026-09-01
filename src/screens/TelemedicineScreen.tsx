@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   Video, 
@@ -93,12 +93,12 @@ export const TelemedicineScreen: React.FC<TelemedicineScreenProps> = ({ onBack }
 
         {/* Top Status & Call Info */}
         <div className="relative z-10 pt-2 flex flex-col items-center gap-1.5">
-          <div className="px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-bold flex items-center gap-2 shadow-lg">
+          <div className="px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-medium flex items-center gap-2 shadow-lg">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>Consulta em andamento • {formatTimer(seconds)}</span>
           </div>
 
-          <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-xs text-white/90 text-[11px] font-medium">
+          <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-xs text-white/90 text-[11px] font-normal">
             Dra. Paola Silveira • CRMV-PR 14.821
           </div>
         </div>
@@ -114,11 +114,11 @@ export const TelemedicineScreen: React.FC<TelemedicineScreenProps> = ({ onBack }
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center bg-slate-800 text-slate-400 p-2 text-center">
               <VideoOff className="w-6 h-6 mb-1 text-slate-500" />
-              <span className="text-[9px] font-semibold">Câmera desligada</span>
+              <span className="text-[9px] font-normal">Câmera desligada</span>
             </div>
           )}
 
-          <div className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded-md bg-black/70 text-[9px] text-white font-bold backdrop-blur-xs flex items-center gap-1">
+          <div className="absolute bottom-1 right-1 px-1.5 py-0.5 rounded-md bg-black/70 text-[9px] text-white font-medium backdrop-blur-xs flex items-center gap-1">
             {!isMicOn && <MicOff className="w-2.5 h-2.5 text-rose-400" />}
             <span>Você</span>
           </div>
@@ -136,7 +136,7 @@ export const TelemedicineScreen: React.FC<TelemedicineScreenProps> = ({ onBack }
             }`}>
               {isVideoOn ? <Video className="w-5 h-5" /> : <VideoOff className="w-5 h-5" />}
             </div>
-            <span className="text-[10px] text-white/80 font-medium">Câmera</span>
+            <span className="text-[10px] text-white/80 font-normal">Câmera</span>
           </button>
 
           {/* Microfone */}
@@ -149,7 +149,7 @@ export const TelemedicineScreen: React.FC<TelemedicineScreenProps> = ({ onBack }
             }`}>
               {isMicOn ? <Mic className="w-5 h-5" /> : <MicOff className="w-5 h-5" />}
             </div>
-            <span className="text-[10px] text-white/80 font-medium">Microfone</span>
+            <span className="text-[10px] text-white/80 font-normal">Microfone</span>
           </button>
 
           {/* Encerrar (Red Button) */}
@@ -158,9 +158,9 @@ export const TelemedicineScreen: React.FC<TelemedicineScreenProps> = ({ onBack }
             className="flex flex-col items-center gap-1 text-white active:scale-90 transition-all"
           >
             <div className="w-14 h-14 rounded-full bg-rose-600 hover:bg-rose-700 shadow-xl shadow-rose-600/50 flex items-center justify-center">
-              <PhoneOff className="w-6 h-6 stroke-[2.5]" />
+              <PhoneOff className="w-6 h-6 stroke-[2]" />
             </div>
-            <span className="text-[10px] text-rose-300 font-bold">Encerrar</span>
+            <span className="text-[10px] text-rose-300 font-medium">Encerrar</span>
           </button>
 
           {/* Chat */}
@@ -171,8 +171,8 @@ export const TelemedicineScreen: React.FC<TelemedicineScreenProps> = ({ onBack }
             <div className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md flex items-center justify-center">
               <MessageSquare className="w-5 h-5" />
             </div>
-            <span className="text-[10px] text-white/80 font-medium">Chat</span>
-            <span className="absolute top-0 right-1 w-3 h-3 bg-[#008779] rounded-full ring-2 ring-slate-950" />
+            <span className="text-[10px] text-white/80 font-normal">Chat</span>
+            <span className="absolute top-0 right-1 w-2.5 h-2.5 bg-[#008779] rounded-full ring-2 ring-slate-950" />
           </button>
         </div>
       </div>
@@ -182,12 +182,12 @@ export const TelemedicineScreen: React.FC<TelemedicineScreenProps> = ({ onBack }
         <div className="absolute inset-x-0 bottom-0 top-16 z-40 bg-white rounded-t-3xl shadow-2xl flex flex-col animate-in slide-in-from-bottom duration-200">
           <div className="p-4 border-b border-slate-100 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-[#e6f7f5] text-[#008779] flex items-center justify-center font-bold text-xs">
+              <div className="w-8 h-8 rounded-full bg-[#e6f7f5] text-[#008779] flex items-center justify-center text-xs">
                 🩺
               </div>
               <div>
-                <h4 className="text-xs font-bold text-slate-800">Chat da Consulta</h4>
-                <p className="text-[10px] text-emerald-600 font-semibold">Dra. Paola Silveira • Online</p>
+                <h4 className="text-xs font-medium text-slate-800">Chat da Consulta</h4>
+                <p className="text-[10px] text-emerald-600 font-normal">Dra. Paola Silveira • Online</p>
               </div>
             </div>
             <button

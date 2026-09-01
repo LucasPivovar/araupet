@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { SlidersHorizontal, Heart, ChevronRight, PawPrint } from 'lucide-react';
 import { Pet } from '../types';
 import { ADOPTION_PETS } from '../data/mockData';
@@ -63,7 +63,7 @@ export const AdoptionScreen: React.FC<AdoptionScreenProps> = ({ onBack }) => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all shrink-0 ${
+                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all shrink-0 ${
                   activeCategory === cat
                     ? 'bg-[#008779] text-white shadow-xs'
                     : 'bg-white text-slate-600 border border-slate-200/80 hover:bg-slate-50'
@@ -79,7 +79,7 @@ export const AdoptionScreen: React.FC<AdoptionScreenProps> = ({ onBack }) => {
             {filteredPets.slice(0, 4).map((pet) => (
               <div
                 key={pet.id}
-                className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col"
+                className="bg-white rounded-2xl border border-slate-100/90 overflow-hidden shadow-2xs hover:shadow-xs hover:border-teal-200 transition-all flex flex-col"
               >
                 {/* Photo with favorite button */}
                 <div className="relative h-28 w-full bg-slate-100">
@@ -90,7 +90,7 @@ export const AdoptionScreen: React.FC<AdoptionScreenProps> = ({ onBack }) => {
                   />
                   <button
                     onClick={() => toggleFavorite(pet.id)}
-                    className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/80 backdrop-blur-xs flex items-center justify-center text-slate-600 hover:text-rose-500 transition-colors shadow-xs"
+                    className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/80 backdrop-blur-xs flex items-center justify-center text-slate-600 hover:text-rose-500 transition-colors shadow-2xs"
                   >
                     <Heart
                       className={`w-3.5 h-3.5 ${
@@ -103,15 +103,15 @@ export const AdoptionScreen: React.FC<AdoptionScreenProps> = ({ onBack }) => {
                 {/* Info and button */}
                 <div className="p-2.5 flex-1 flex flex-col justify-between space-y-2">
                   <div>
-                    <h4 className="text-xs font-bold text-slate-800">{pet.name}</h4>
-                    <p className="text-[10px] text-slate-400">
+                    <h4 className="text-xs font-medium text-slate-800">{pet.name}</h4>
+                    <p className="text-[10px] text-slate-400 font-normal">
                       {pet.age} • {pet.gender}
                     </p>
                   </div>
 
                   <button
                     onClick={() => handleOpenDetail(pet)}
-                    className="w-full py-1.5 text-center text-[11px] font-bold text-[#008779] hover:bg-teal-50 rounded-lg border border-teal-200/70 transition-colors"
+                    className="w-full py-1.5 text-center text-[11px] font-medium text-[#008779] hover:bg-teal-50 rounded-lg border border-teal-200/70 transition-colors"
                   >
                     Ver perfil
                   </button>
@@ -133,9 +133,9 @@ export const AdoptionScreen: React.FC<AdoptionScreenProps> = ({ onBack }) => {
               <PawPrint className="w-4 h-4" />
             </div>
             <div>
-              <h5 className="text-xs font-bold text-[#008779]">Quer adotar?</h5>
-              <p className="text-[10px] text-teal-800 font-medium">
-                Adoção consciente muda vidas.
+              <h5 className="text-xs font-medium text-[#008779]">Quer adotar um amigo?</h5>
+              <p className="text-[10px] text-teal-800 font-normal">
+                Adoção responsável e gratuita em Araucária.
               </p>
             </div>
           </div>

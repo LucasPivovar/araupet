@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { X, Heart, ShieldCheck, Check, Phone, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Pet } from '../../types';
@@ -85,17 +85,17 @@ export const PetDetailModal: React.FC<PetDetailModalProps> = ({
           {interestSubmitted ? (
             <div className="p-4 text-center space-y-3 bg-teal-50 rounded-2xl border border-teal-100">
               <div className="w-12 h-12 rounded-full bg-[#008779] text-white flex items-center justify-center mx-auto">
-                <Check className="w-7 h-7 stroke-[3]" />
+                <Check className="w-6 h-6 stroke-[2.5]" />
               </div>
-              <h4 className="font-extrabold text-slate-800 text-base">
+              <h4 className="font-semibold text-slate-800 text-base">
                 Interesse Registrado!
               </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 font-normal leading-relaxed">
                 Nossa equipe da Coordenação de Bem-Estar Animal de Araucária entrará em contato pelo WhatsApp cadastrado para agendar uma visita e entrevista.
               </p>
               <button
                 onClick={handleClose}
-                className="w-full py-2.5 bg-[#008779] text-white rounded-xl font-bold text-xs shadow-xs"
+                className="w-full py-2.5 bg-[#008779] text-white rounded-xl font-medium text-xs shadow-xs"
               >
                 Entendido
               </button>
@@ -106,29 +106,29 @@ export const PetDetailModal: React.FC<PetDetailModalProps> = ({
               <div className="grid grid-cols-3 gap-2">
                 <div className="p-2.5 rounded-xl bg-teal-50 border border-teal-100 text-center">
                   <ShieldCheck className="w-4 h-4 text-[#008779] mx-auto mb-1" />
-                  <p className="text-[10px] text-slate-500 font-medium">Vacinas</p>
-                  <p className="text-xs font-bold text-[#008779]">100% Em Dia</p>
+                  <p className="text-[10px] text-slate-500 font-normal">Vacinas</p>
+                  <p className="text-xs font-medium text-[#008779]">100% Em Dia</p>
                 </div>
                 <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-100 text-center">
                   <Sparkles className="w-4 h-4 text-emerald-600 mx-auto mb-1" />
-                  <p className="text-[10px] text-slate-500 font-medium">Castração</p>
-                  <p className="text-xs font-bold text-emerald-700">Castrado(a)</p>
+                  <p className="text-[10px] text-slate-500 font-normal">Castração</p>
+                  <p className="text-xs font-medium text-emerald-700">Castrado(a)</p>
                 </div>
                 <div className="p-2.5 rounded-xl bg-cyan-50 border border-cyan-100 text-center">
                   <ShieldCheck className="w-4 h-4 text-cyan-600 mx-auto mb-1" />
-                  <p className="text-[10px] text-slate-500 font-medium">Microchip</p>
-                  <p className="text-xs font-bold text-cyan-700">Registrado</p>
+                  <p className="text-[10px] text-slate-500 font-normal">Microchip</p>
+                  <p className="text-xs font-medium text-cyan-700">Registrado</p>
                 </div>
               </div>
 
               {/* Tags */}
               <div>
-                <h4 className="text-xs font-bold text-slate-700 mb-1.5">Características</h4>
+                <h4 className="text-xs font-medium text-slate-700 mb-1.5">Características</h4>
                 <div className="flex flex-wrap gap-1.5">
                   {pet.tags?.map((t, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-[11px] font-semibold"
+                      className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-[11px] font-normal"
                     >
                       {t}
                     </span>
@@ -138,8 +138,8 @@ export const PetDetailModal: React.FC<PetDetailModalProps> = ({
 
               {/* Story */}
               <div>
-                <h4 className="text-xs font-bold text-slate-700 mb-1">História do Pet</h4>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <h4 className="text-xs font-medium text-slate-700 mb-1">História do Pet</h4>
+                <p className="text-xs text-slate-600 font-normal leading-relaxed">
                   {pet.description}
                 </p>
               </div>
@@ -147,7 +147,7 @@ export const PetDetailModal: React.FC<PetDetailModalProps> = ({
               {/* Action Button */}
               <button
                 onClick={handleInterest}
-                className="w-full py-3 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-sm shadow-md transition-all flex items-center justify-center gap-2"
               >
                 <Heart className="w-4 h-4 fill-current" />
                 Quero Adotar o(a) {pet.name}

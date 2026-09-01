@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { 
   User, 
   Settings, 
@@ -62,10 +62,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
       {/* Main Content */}
       <div className="p-4 space-y-4">
         {/* Toggle Switch between Perfil and Configurações */}
-        <div className="flex p-1 bg-slate-200/80 rounded-xl">
+        <div className="flex p-1 bg-slate-200/70 rounded-xl">
           <button
             onClick={() => setActiveTab('perfil')}
-            className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all ${
+            className={`flex-1 py-1.5 text-xs font-medium rounded-lg transition-all ${
               activeTab === 'perfil'
                 ? 'bg-[#008779] text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -75,7 +75,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
           </button>
           <button
             onClick={() => setActiveTab('config')}
-            className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center justify-center gap-1.5 ${
               activeTab === 'config'
                 ? 'bg-[#008779] text-white shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -107,15 +107,15 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-sm font-black text-slate-800 truncate">
+                  <h3 className="text-sm font-semibold text-slate-800 truncate">
                     {CURRENT_USER.name}
                   </h3>
-                  <span className="text-[10px] font-bold bg-teal-100 text-[#008779] px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] font-medium bg-teal-100 text-[#008779] px-1.5 py-0.5 rounded">
                     Cidadã Araucária
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 truncate">{CURRENT_USER.email}</p>
-                <p className="text-[11px] text-slate-500 font-medium flex items-center gap-1 mt-0.5">
+                <p className="text-xs text-slate-400 font-normal truncate">{CURRENT_USER.email}</p>
+                <p className="text-[11px] text-slate-500 font-normal flex items-center gap-1 mt-0.5">
                   <MapPin className="w-3 h-3 text-[#008779]" />
                   <span>{CURRENT_USER.city}</span>
                 </p>
@@ -125,10 +125,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             {/* Meus Pets Section */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold text-slate-700">Meus Pets Cadastrados</h4>
+                <h4 className="text-xs font-medium text-slate-700">Meus Pets Cadastrados</h4>
                 <button
                   onClick={() => onNavigate('wallet')}
-                  className="text-[11px] font-bold text-[#008779] flex items-center gap-1"
+                  className="text-[11px] font-medium text-[#008779] flex items-center gap-1"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   Adicionar Pet
@@ -146,13 +146,13 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
                     className="w-11 h-11 rounded-xl object-cover"
                   />
                   <div>
-                    <h5 className="text-xs font-bold text-slate-800">{MY_PET.name}</h5>
-                    <p className="text-[11px] text-slate-400">
-                      {MY_PET.breed} • <span className="text-emerald-600 font-bold">{MY_PET.vaccinesStatus}</span>
+                    <h5 className="text-xs font-medium text-slate-800">{MY_PET.name}</h5>
+                    <p className="text-[11px] text-slate-400 font-normal">
+                      {MY_PET.breed} • <span className="text-emerald-600 font-medium">{MY_PET.vaccinesStatus}</span>
                     </p>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-[#008779] bg-teal-50 px-2.5 py-1 rounded-lg">
+                <span className="text-xs font-medium text-[#008779] bg-teal-50 px-2.5 py-1 rounded-lg">
                   Ver Carteira
                 </span>
               </div>
@@ -166,7 +166,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               >
                 <div className="flex items-center gap-3 text-slate-700">
                   <ShieldCheck className="w-4 h-4 text-[#008779]" />
-                  <span className="text-xs font-semibold">Agendamentos de Vacinas & Castração</span>
+                  <span className="text-xs font-normal">Agendamentos de Vacinas & Castração</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
@@ -177,7 +177,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               >
                 <div className="flex items-center gap-3 text-slate-700">
                   <Settings className="w-4 h-4 text-[#008779]" />
-                  <span className="text-xs font-semibold">Configurações & Notificações</span>
+                  <span className="text-xs font-normal">Configurações & Notificações</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
@@ -188,7 +188,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               >
                 <div className="flex items-center gap-3 text-slate-700">
                   <HelpCircle className="w-4 h-4 text-[#008779]" />
-                  <span className="text-xs font-semibold">Central de Atendimento CCZ Araucária</span>
+                  <span className="text-xs font-normal">Central de Atendimento CCZ Araucária</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
@@ -199,7 +199,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
           <div className="space-y-4">
             {/* Notificações Settings Card */}
             <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-3">
-              <h4 className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <h4 className="text-xs font-medium text-slate-800 flex items-center gap-1.5">
                 <Bell className="w-4 h-4 text-[#008779]" />
                 Notificações e Lembretes
               </h4>
@@ -207,8 +207,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               {/* Push Notifications */}
               <div className="flex items-center justify-between pt-1">
                 <div>
-                  <p className="text-xs font-semibold text-slate-700">Lembretes de Vacinação</p>
-                  <p className="text-[10px] text-slate-400">Avisos antes do vencimento das doses</p>
+                  <p className="text-xs font-medium text-slate-700">Lembretes de Vacinação</p>
+                  <p className="text-[10px] text-slate-400 font-normal">Avisos antes do vencimento das doses</p>
                 </div>
                 <button
                   onClick={() => setPushEnabled(!pushEnabled)}
@@ -227,8 +227,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               {/* WhatsApp Alerts */}
               <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                 <div>
-                  <p className="text-xs font-semibold text-slate-700">Alertas por WhatsApp</p>
-                  <p className="text-[10px] text-slate-400">Campanhas municipais no seu bairro</p>
+                  <p className="text-xs font-medium text-slate-700">Alertas por WhatsApp</p>
+                  <p className="text-[10px] text-slate-400 font-normal">Campanhas municipais no seu bairro</p>
                 </div>
                 <button
                   onClick={() => setWhatsappAlerts(!whatsappAlerts)}
@@ -247,8 +247,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               {/* Lost Pet Radar */}
               <div className="flex items-center justify-between pt-2 border-t border-slate-100">
                 <div>
-                  <p className="text-xs font-semibold text-slate-700">Radar de Animais Perdidos</p>
-                  <p className="text-[10px] text-slate-400">Notificar se houver pet perdido em 3km</p>
+                  <p className="text-xs font-medium text-slate-700">Radar de Animais Desaparecidos</p>
+                  <p className="text-[10px] text-slate-400 font-normal">Notificar se houver pet desaparecido em 3km</p>
                 </div>
                 <button
                   onClick={() => setLostPetRadar(!lostPetRadar)}
@@ -267,7 +267,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
 
             {/* Segurança & Acesso */}
             <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-3">
-              <h4 className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+              <h4 className="text-xs font-medium text-slate-800 flex items-center gap-1.5">
                 <Lock className="w-4 h-4 text-[#008779]" />
                 Segurança e Acesso
               </h4>
@@ -275,8 +275,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               {/* Biometrics */}
               <div className="flex items-center justify-between pt-1">
                 <div>
-                  <p className="text-xs font-semibold text-slate-700">Acesso por Biometria / Face ID</p>
-                  <p className="text-[10px] text-slate-400">Entrar com segurança sem digitar senha</p>
+                  <p className="text-xs font-medium text-slate-700">Acesso por Biometria / Face ID</p>
+                  <p className="text-[10px] text-slate-400 font-normal">Entrar com segurança sem digitar senha</p>
                 </div>
                 <button
                   onClick={() => setBiometrics(!biometrics)}
@@ -297,14 +297,14 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
                 onClick={() => alert('Link para alteração de senha enviado ao seu e-mail!')}
                 className="w-full pt-2 border-t border-slate-100 flex items-center justify-between text-left"
               >
-                <span className="text-xs font-semibold text-slate-700">Alterar Senha</span>
+                <span className="text-xs font-normal text-slate-700">Alterar Senha</span>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
 
               {/* Gov.br Integration */}
               <div className="w-full pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="font-semibold text-slate-700">Conta Gov.br</span>
-                <span className="px-2 py-0.5 bg-blue-50 text-blue-700 font-bold rounded-md text-[10px]">
+                <span className="font-normal text-slate-700">Conta Gov.br</span>
+                <span className="px-2 py-0.5 bg-blue-50 text-blue-700 font-medium rounded-md text-[10px]">
                   Vinculada
                 </span>
               </div>
@@ -312,14 +312,14 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
 
             {/* Informações Oficiais & CCZ */}
             <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-2 text-xs">
-              <h4 className="font-bold text-slate-800">Prefeitura de Araucária</h4>
-              <p className="text-[11px] text-slate-500 leading-relaxed">
+              <h4 className="font-medium text-slate-800">Prefeitura de Araucária</h4>
+              <p className="text-[11px] text-slate-500 font-normal leading-relaxed">
                 Secretaria Municipal de Meio Ambiente • Divisão de Bem-Estar Animal
               </p>
-              <p className="text-[11px] text-slate-500">
+              <p className="text-[11px] text-slate-500 font-normal">
                 📍 Rua Ceará, 245 - Costeira | 📞 (41) 3642-0000
               </p>
-              <p className="text-[10px] text-slate-400 pt-1">Versão 2.4.0 (Build Oficial 2026)</p>
+              <p className="text-[10px] text-slate-400 font-normal pt-1">Versão 2.4.0 (Build Oficial 2026)</p>
             </div>
           </div>
         )}
@@ -327,7 +327,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
         {/* Logout Button */}
         <button
           onClick={() => onNavigate('login')}
-          className="w-full py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-2 transition-colors active:scale-[0.99]"
+          className="w-full py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-xs flex items-center justify-center gap-2 transition-colors active:scale-[0.99]"
         >
           <LogOut className="w-4 h-4 text-rose-500" />
           <span>Sair da Conta</span>

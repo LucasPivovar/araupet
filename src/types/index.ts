@@ -1,4 +1,4 @@
-﻿export type ScreenId = 
+export type ScreenId = 
   | 'login'
   | 'register'
   | 'home' 
@@ -76,6 +76,7 @@ export interface Partner {
   discount: string;
   discountTarget: string;
   logo: string;
+  image: string;
   address: string;
   phone: string;
   rating: number;
