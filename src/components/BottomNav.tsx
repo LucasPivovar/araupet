@@ -1,6 +1,6 @@
 import React from 'react';
 import { Home, LayoutGrid, CreditCard, Bell, User } from 'lucide-react';
-import { NavTabId, ScreenId } from '../types';
+import { NavTabId } from '../types';
 
 interface BottomNavProps {
   activeTab: NavTabId;
@@ -26,6 +26,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
+        const isWallet = tab.id === 'carteira';
 
         return (
           <button
@@ -37,7 +38,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 : 'text-slate-400 hover:text-slate-600'
             }`}
           >
-            <div className="relative">
+            <div
+              className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all ${
+                isWallet
+                  ? isActive
+                    ? 'bg-[#008779] text-white shadow-md shadow-[#008779]/25'
+                    : 'bg-white border border-slate-200 text-slate-500 shadow-xs'
+                  : ''
+              }`}
+            >
               <Icon className={`w-5 h-5 transition-transform ${isActive ? 'scale-105 stroke-[2.2]' : 'stroke-[1.8]'}`} />
               {tab.id === 'alertas' && unreadAlertsCount > 0 && (
                 <span className="absolute -top-1.5 -right-2.5 min-w-[17px] h-[17px] px-1 bg-rose-500 text-white text-[9px] font-medium rounded-full flex items-center justify-center ring-2 ring-white leading-none shadow-xs">

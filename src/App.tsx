@@ -11,10 +11,14 @@ import { LostFoundScreen } from './screens/LostFoundScreen';
 import { PartnersScreen } from './screens/PartnersScreen';
 import { AlertsScreen } from './screens/AlertsScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
+import { SupportChatScreen } from './screens/SupportChatScreen';
+import { MY_PET } from './data/mockData';
+import { Pet } from './types';
 
 export function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('login');
   const [unreadAlerts, setUnreadAlerts] = useState<number>(2);
+  const [registeredPets, setRegisteredPets] = useState<Pet[]>([MY_PET]);
 
   // Map screen to bottom nav tab
   const getActiveTab = (): NavTabId => {
@@ -33,6 +37,7 @@ export function App() {
         return 'alertas';
       case 'profile':
       case 'settings':
+      case 'support':
         return 'perfil';
       default:
         return 'inicio';
@@ -77,7 +82,13 @@ export function App() {
           />
         );
       case 'wallet':
-        return <PetWalletScreen onBack={() => setCurrentScreen('home')} />;
+        return (
+          <PetWalletScreen
+            onBack={() => setCurrentScreen('home')}
+            pets={registeredPets}
+            onAddPet={(pet) => setRegisteredPets((current) => [...current, pet])}
+          />
+        );
       case 'telemed':
         return <TelemedicineScreen onBack={() => setCurrentScreen('home')} />;
       case 'vaccines':
@@ -101,8 +112,12 @@ export function App() {
           <ProfileScreen
             onBack={() => setCurrentScreen('home')}
             onNavigate={setCurrentScreen}
+            pets={registeredPets}
+            onAddPet={(pet) => setRegisteredPets((current) => [...current, pet])}
           />
         );
+      case 'support':
+        return <SupportChatScreen onBack={() => setCurrentScreen('profile')} />;
       default:
         return (
           <HomeScreen

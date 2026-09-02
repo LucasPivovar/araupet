@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { Search, MapPin, Percent, ChevronRight, Store, Star, Award } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Search, MapPin, Percent, ChevronRight, Star } from 'lucide-react';
 import { Partner } from '../types';
 import { PARTNERS } from '../data/mockData';
 import { TopBar } from '../components/TopBar';
 import { CouponModal } from '../components/Modals/CouponModal';
+import partnersBannerVet from '../assets/partners-banner-vet.png';
+import partnersBannerPharmacy from '../assets/partners-banner-pharmacy.png';
+import partnersBannerGrooming from '../assets/partners-banner-grooming.png';
 
 interface PartnersScreenProps {
   onBack: () => void;
@@ -14,6 +17,7 @@ export const PartnersScreen: React.FC<PartnersScreenProps> = ({ onBack }) => {
   const [activeCategory, setActiveCategory] = useState<string>('Todos');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   const categories = [
     { id: 'Todos', label: 'Todos' },
@@ -32,6 +36,37 @@ export const PartnersScreen: React.FC<PartnersScreenProps> = ({ onBack }) => {
     return matchesCat && matchesSearch;
   });
 
+  const heroSlides = [
+    {
+      title: 'Clínicas parceiras perto de você',
+      description: 'Gere cupons para consultas, exames e atendimento veterinário.',
+      image: partnersBannerVet,
+      position: 'center center',
+    },
+    {
+      title: 'Farmácias e pet shops com desconto',
+      description: 'Encontre produtos, rações e cuidados com benefícios ativos.',
+      image: partnersBannerPharmacy,
+      position: 'center center',
+    },
+    {
+      title: 'Banho e tosa na rede credenciada',
+      description: 'Use filtros e gere um cupom antes do atendimento.',
+      image: partnersBannerGrooming,
+      position: 'center center',
+    },
+  ];
+
+  const currentSlide = heroSlides[activeSlide];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 4200);
+
+    return () => window.clearInterval(timer);
+  }, [heroSlides.length]);
+
   return (
     <div className="flex-1 flex flex-col bg-[#f8fafc] overflow-y-auto custom-scrollbar">
       {/* Top Bar */}
@@ -44,26 +79,58 @@ export const PartnersScreen: React.FC<PartnersScreenProps> = ({ onBack }) => {
 
       {/* Main Content */}
       <div className="p-4 space-y-3.5">
-        {/* Benefit Hero Banner */}
-        <div className="relative rounded-2xl bg-gradient-to-r from-[#007063] via-[#008779] to-[#00a896] text-white p-4 overflow-hidden shadow-md flex items-center justify-between">
-          <div className="space-y-1.5 max-w-[62%]">
-            <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-medium tracking-wider bg-white/20 uppercase backdrop-blur-xs">
-              REDE CREDENCIADA ARAUCÁRIA
-            </span>
-            <h3 className="text-sm font-semibold leading-snug">
-              Descontos exclusivos nos melhores parceiros
-            </h3>
-            <p className="text-[11px] text-teal-100 font-normal leading-tight">
-              Apresente o cupom ou carteira digital em estabelecimentos conveniados.
-            </p>
-          </div>
-
-          <div className="relative flex items-center">
+        {/* Benefit Hero Slider */}
+        <div className="relative min-h-[128px] rounded-2xl text-white overflow-hidden shadow-md shadow-[#008779]/20">
+          {heroSlides.map((slide, index) => (
             <img
-              src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=200&auto=format&fit=crop&q=80"
-              alt="Benefícios ArauPet"
-              className="w-18 h-18 rounded-2xl object-cover ring-2 ring-white/40 shadow-md"
+              key={slide.title}
+              src={slide.image}
+              alt=""
+              style={{ objectPosition: slide.position }}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
+                activeSlide === index ? 'opacity-100' : 'opacity-0'
+              }`}
             />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#006e63]/95 via-[#008779]/80 to-[#00a896]/30" />
+
+          <button
+            type="button"
+            onClick={() => setSelectedPartner(partners[activeSlide] ?? null)}
+            className="relative z-10 flex min-h-[128px] w-full items-center text-left p-4"
+          >
+            <div className="space-y-1.5 max-w-[72%]">
+              <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-medium tracking-wider bg-white/20 uppercase backdrop-blur-xs">
+                Rede credenciada
+              </span>
+              <h3 className="text-sm font-semibold leading-snug">
+                {currentSlide.title}
+              </h3>
+              <p className="text-[11px] text-teal-100 font-normal leading-tight">
+                {currentSlide.description}
+              </p>
+            </div>
+          </button>
+
+          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-0.5">
+            {heroSlides.map((slide, index) => (
+              <button
+                key={slide.title}
+                type="button"
+                aria-label={`Mostrar destaque ${index + 1}`}
+                onPointerDown={(event) => {
+                  event.stopPropagation();
+                  setActiveSlide(index);
+                }}
+                className="h-4 w-4 rounded-full flex items-center justify-center transition-all active:scale-95"
+              >
+                <span
+                  className={`h-1.5 rounded-full transition-all ${
+                    activeSlide === index ? 'w-4 bg-white shadow-sm' : 'w-1.5 bg-white/55'
+                  }`}
+                />
+              </button>
+            ))}
           </div>
         </div>
 
@@ -96,13 +163,13 @@ export const PartnersScreen: React.FC<PartnersScreenProps> = ({ onBack }) => {
           ))}
         </div>
 
-        {/* Partners List with Real Photos */}
-        <div className="space-y-3">
+        {/* Partners Grid with Real Photos */}
+        <div className="grid grid-cols-2 gap-2.5">
           {filteredPartners.map((partner) => (
             <div
               key={partner.id}
               onClick={() => setSelectedPartner(partner)}
-              className="rounded-2xl bg-white border border-slate-100/90 shadow-xs hover:border-teal-200 transition-all overflow-hidden cursor-pointer group active:scale-[0.99]"
+              className="rounded-2xl bg-white border border-slate-100/90 shadow-xs hover:border-teal-200 transition-all overflow-hidden cursor-pointer group active:scale-[0.99] min-w-0"
             >
               {/* Partner Real Building/Storefront Photo Header */}
               <div className="relative h-28 w-full bg-slate-100 overflow-hidden">
@@ -114,47 +181,43 @@ export const PartnersScreen: React.FC<PartnersScreenProps> = ({ onBack }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
                 
                 {/* Discount Tag */}
-                <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-rose-500 text-white shadow-md flex items-center gap-1">
-                  <Percent className="w-3 h-3 stroke-[2.5]" />
-                  <span className="text-[11px] font-semibold">{partner.discount}</span>
+                <div className="absolute top-2 right-2 px-2 py-1 rounded-lg bg-rose-500 text-white shadow-md flex items-center gap-1">
+                  <Percent className="w-2.5 h-2.5 stroke-[2.5]" />
+                  <span className="text-[10px] font-semibold">{partner.discount}</span>
                 </div>
 
                 {/* Rating Badge */}
-                <div className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/50 backdrop-blur-xs text-white text-[10px] font-medium flex items-center gap-1">
-                  <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded-md bg-black/50 backdrop-blur-xs text-white text-[9px] font-medium flex items-center gap-1">
+                  <Star className="w-2.5 h-2.5 text-amber-400 fill-amber-400" />
                   <span>{partner.rating.toFixed(1)}</span>
                 </div>
 
                 {/* Logo & Category on bottom left */}
-                <div className="absolute bottom-2.5 left-2.5 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-white shadow-md flex items-center justify-center text-base border border-slate-100">
+                <div className="absolute bottom-2 left-2 flex items-center gap-1.5 max-w-[72%]">
+                  <div className="w-7 h-7 rounded-lg bg-white shadow-md flex items-center justify-center text-sm border border-slate-100 shrink-0">
                     {partner.logo}
                   </div>
-                  <span className="text-[11px] text-white/90 font-medium drop-shadow-sm">
+                  <span className="text-[10px] text-white/90 font-medium drop-shadow-sm truncate">
                     {partner.categoryLabel}
                   </span>
                 </div>
               </div>
 
               {/* Info Body */}
-              <div className="p-3.5 space-y-2">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="text-[13px] font-medium text-slate-800 group-hover:text-[#008779] transition-colors">
-                      {partner.name}
-                    </h4>
-                    <p className="text-[11px] text-slate-500 font-normal mt-0.5">
-                      Válido para: <span className="text-slate-700 font-medium">{partner.discountTarget}</span>
-                    </p>
-                  </div>
-                </div>
+              <div className="p-2.5 space-y-1.5">
+                <h4 className="text-[12px] font-medium text-slate-800 group-hover:text-[#008779] transition-colors leading-tight truncate">
+                  {partner.name}
+                </h4>
+                <p className="text-[10px] text-slate-500 font-normal leading-tight truncate">
+                  Válido para: <span className="text-slate-700 font-medium">{partner.discountTarget}</span>
+                </p>
 
-                <div className="flex items-center justify-between pt-2 border-t border-slate-100/80 text-[11px]">
-                  <div className="flex items-center gap-1 text-slate-400 font-normal truncate max-w-[210px]">
+                <div className="space-y-1 pt-1.5 border-t border-slate-100/80 text-[10px]">
+                  <div className="flex items-center gap-1 text-slate-400 font-normal min-w-0">
                     <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
                     <span className="truncate">{partner.address}</span>
                   </div>
-                  <span className="text-[#008779] font-medium shrink-0 group-hover:underline flex items-center gap-0.5">
+                  <span className="text-[#008779] font-medium group-hover:underline flex items-center justify-end gap-0.5">
                     <span>Ver cupom</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </span>

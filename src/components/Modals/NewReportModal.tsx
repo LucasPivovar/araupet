@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, Camera, MapPin, CheckCircle, AlertTriangle } from 'lucide-react';
+import { X, Camera, AlertTriangle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { LostFoundPet } from '../../types';
+import { MY_PET } from '../../data/mockData';
 
 interface NewReportModalProps {
   isOpen: boolean;
@@ -19,25 +20,28 @@ export const NewReportModal: React.FC<NewReportModalProps> = ({
   const [breed, setBreed] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-  const [contact, setContact] = useState('(41) 99876-5432');
+  const [contact] = useState('(41) 99876-5432');
+  const [selectedRegisteredPet, setSelectedRegisteredPet] = useState(MY_PET.id);
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const registeredPet = selectedRegisteredPet === MY_PET.id ? MY_PET : null;
     const newPet: LostFoundPet = {
       id: `report-${Date.now()}`,
-      name: name.trim() || (type === 'desaparecido' ? 'Pet Desaparecido' : 'Pet Encontrado'),
+      name: name.trim() || registeredPet?.name || (type === 'desaparecido' ? 'Pet Desaparecido' : 'Pet Encontrado'),
       type,
       species: 'Cachorro',
-      breed: breed || 'SRD',
+      breed: breed || registeredPet?.breed || 'SRD',
       gender: 'Macho',
       date: type === 'desaparecido' ? 'Desapareceu Hoje' : 'Encontrado Hoje',
       location: location || 'Centro, Araucária',
       distance: '0,5 km de você',
-      photo: type === 'desaparecido'
+      photo: registeredPet?.photo || (type === 'desaparecido'
         ? 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&auto=format&fit=crop&q=80'
-        : 'https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?w=400&auto=format&fit=crop&q=80',
+        : 'https://images.unsplash.com/photo-1503256207526-0d5d80fa2f47?w=400&auto=format&fit=crop&q=80'
+      ),
       description: description || 'Pet avistado/perdido na região de Araucária.',
       contactPhone: contact,
       lat: -25.5925 + (Math.random() - 0.5) * 0.015,
@@ -106,6 +110,28 @@ export const NewReportModal: React.FC<NewReportModalProps> = ({
               </button>
             </div>
           </div>
+
+          {type === 'desaparecido' && (
+            <div>
+              <label className="text-xs font-medium text-slate-700 block mb-1">
+                Qual pet desapareceu?
+              </label>
+              <select
+                value={selectedRegisteredPet}
+                onChange={(e) => {
+                  setSelectedRegisteredPet(e.target.value);
+                  if (e.target.value === MY_PET.id) {
+                    setName(MY_PET.name);
+                    setBreed(MY_PET.breed);
+                  }
+                }}
+                className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-[#008779] font-normal"
+              >
+                <option value={MY_PET.id}>{MY_PET.name} - {MY_PET.breed}</option>
+                <option value="outro">Outro pet</option>
+              </select>
+            </div>
+          )}
 
           {/* Pet Name */}
           <div>

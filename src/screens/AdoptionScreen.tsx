@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SlidersHorizontal, Heart, ChevronRight, PawPrint } from 'lucide-react';
+import { Heart, PawPrint } from 'lucide-react';
 import { Pet } from '../types';
 import { ADOPTION_PETS } from '../data/mockData';
 import { TopBar } from '../components/TopBar';
@@ -47,16 +47,23 @@ export const AdoptionScreen: React.FC<AdoptionScreenProps> = ({ onBack }) => {
         onBack={onBack}
         showBack={true}
         darkIcons={true}
-        rightAction={
-          <button className="p-1 text-slate-600 hover:text-slate-900 rounded-full">
-            <SlidersHorizontal className="w-4 h-4" />
-          </button>
-        }
       />
 
       {/* Main Content */}
-      <div className="p-4 space-y-3.5 flex-1 flex flex-col justify-between">
+      <div className="p-4 space-y-3.5">
         <div className="space-y-3">
+          <div className="p-3 rounded-2xl bg-[#e6f7f5] border border-teal-200/80 flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-[#008779] text-white flex items-center justify-center shrink-0">
+              <PawPrint className="w-4 h-4" />
+            </div>
+            <div>
+              <h5 className="text-xs font-medium text-[#008779]">Pets disponíveis para adoção</h5>
+              <p className="text-[10px] text-teal-800 font-normal">
+                Encontre animais acompanhados pela rede municipal.
+              </p>
+            </div>
+          </div>
+
           {/* Category Chips */}
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
             {categories.map((cat) => (
@@ -119,27 +126,6 @@ export const AdoptionScreen: React.FC<AdoptionScreenProps> = ({ onBack }) => {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Bottom Awareness Banner */}
-        <div
-          onClick={() => {
-            if (filteredPets.length > 0) handleOpenDetail(filteredPets[0]);
-          }}
-          className="p-3 rounded-2xl bg-[#e6f7f5] border border-teal-200/80 flex items-center justify-between cursor-pointer hover:bg-teal-100/70 transition-colors mt-2"
-        >
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#008779] text-white flex items-center justify-center shrink-0">
-              <PawPrint className="w-4 h-4" />
-            </div>
-            <div>
-              <h5 className="text-xs font-medium text-[#008779]">Quer adotar um amigo?</h5>
-              <p className="text-[10px] text-teal-800 font-normal">
-                Adoção responsável e gratuita em Araucária.
-              </p>
-            </div>
-          </div>
-          <ChevronRight className="w-4 h-4 text-[#008779]" />
         </div>
       </div>
 

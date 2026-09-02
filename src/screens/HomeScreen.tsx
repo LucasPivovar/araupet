@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Bell, 
   Syringe, 
@@ -9,12 +9,14 @@ import {
   Stethoscope, 
   Store, 
   ChevronRight,
-  Sparkles,
   PhoneCall
 } from 'lucide-react';
 import { ScreenId } from '../types';
 import { CURRENT_USER } from '../data/mockData';
-import { TopBar } from '../components/TopBar';
+import homeBannerVet24 from '../assets/home-banner-vet24.png';
+import homeBannerAdoption from '../assets/home-banner-adoption.png';
+import homeBannerVaccine from '../assets/home-banner-vaccine.png';
+import homeBannerPartners from '../assets/home-banner-partners.png';
 
 interface HomeScreenProps {
   onNavigate: (screen: ScreenId) => void;
@@ -25,6 +27,71 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   onNavigate,
   unreadCount = 2,
 }) => {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      id: 'telemed',
+      label: 'Veterinário 24h',
+      title: 'Atendimento gratuito para seu pet',
+      description: 'Converse com um veterinário quando precisar.',
+      action: 'Falar agora',
+      screen: 'telemed' as ScreenId,
+      image: homeBannerVet24,
+      icon: PhoneCall,
+      textSide: 'left',
+      imagePosition: 'center 32%',
+    },
+    {
+      id: 'adoption',
+      label: 'Adoção responsável',
+      title: 'Um novo amigo esperando por você',
+      description: 'Veja pets acompanhados e prontos para adoção.',
+      action: 'Ver adoção',
+      screen: 'adoption' as ScreenId,
+      image: homeBannerAdoption,
+      icon: Heart,
+      textSide: 'right',
+      imagePosition: 'center center',
+    },
+    {
+      id: 'partners',
+      label: 'Benefícios',
+      title: 'Descontos na rede parceira',
+      description: 'Clínicas, pet shops, banho e tosa perto de você.',
+      action: 'Ver cupons',
+      screen: 'partners' as ScreenId,
+      image: homeBannerPartners,
+      icon: Store,
+      textSide: 'right',
+      imagePosition: 'center center',
+    },
+    {
+      id: 'vaccines',
+      label: 'Campanhas',
+      title: 'Vacinação sempre em dia',
+      description: 'Acompanhe datas e agende atendimento municipal.',
+      action: 'Agendar',
+      screen: 'vaccines' as ScreenId,
+      image: homeBannerVaccine,
+      icon: Syringe,
+      textSide: 'left',
+      imagePosition: 'center center',
+    },
+  ];
+
+  const hero = heroSlides[activeSlide];
+  const HeroIcon = hero.icon;
+  const isTextRight = hero.textSide === 'right';
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [heroSlides.length]);
+
   const quickActions = [
     {
       id: 'vaccines',
@@ -60,7 +127,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     },
     {
       id: 'carteira',
-      title: 'Carteira\nDigital',
+      title: 'Carteira Pet\nDigital',
       icon: CreditCard,
       bgColor: 'bg-[#eaf8f5]',
       iconColor: 'text-[#0d9488]',
@@ -118,41 +185,74 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </button>
         </div>
 
-        {/* Telemedicina 24h Hero Banner */}
+        {/* Main Hero Slider */}
         <div 
-          onClick={() => onNavigate('telemed')}
-          className="relative rounded-2xl bg-gradient-to-br from-[#006e63] via-[#008779] to-[#029688] text-white p-4.5 overflow-hidden shadow-md shadow-[#008779]/20 cursor-pointer transform transition-all active:scale-[0.99] hover:shadow-lg"
+          onClick={() => onNavigate(hero.screen)}
+          className="relative min-h-[178px] rounded-2xl overflow-hidden shadow-md shadow-[#008779]/20 cursor-pointer transform transition-all active:scale-[0.99] hover:shadow-lg"
         >
-          <div className="relative z-10 flex items-center justify-between">
-            <div className="max-w-[58%] space-y-2">
-              <span className="inline-block px-2.5 py-0.5 rounded-full text-[9px] font-medium tracking-wider bg-white/20 uppercase backdrop-blur-md">
-                ArauPet • Telemedicina 24h
+          {heroSlides.map((slide, index) => (
+            <img
+              key={slide.id}
+              src={slide.image}
+              alt=""
+              style={{ objectPosition: slide.imagePosition }}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
+                index === activeSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
+
+          <div className={`relative z-10 flex min-h-[178px] items-center p-4.5 ${isTextRight ? 'justify-end text-slate-800' : 'justify-start text-white'}`}>
+            <div className={`w-[58%] space-y-2 ${isTextRight ? 'text-right' : 'text-left'}`}>
+              <span className={`inline-block px-2.5 py-0.5 rounded-full text-[9px] font-medium tracking-wider uppercase backdrop-blur-md ${
+                isTextRight ? 'bg-[#008779]/10 text-[#008779]' : 'bg-white/20 text-white'
+              }`}>
+                {hero.label}
               </span>
-              <p className="text-xs text-teal-50 font-normal leading-relaxed">
-                Atendimento veterinário gratuito onde você estiver.
+              <h3 className={`text-[15px] font-semibold leading-tight transition-colors duration-500 ${isTextRight ? '' : 'drop-shadow-sm'}`}>
+                {hero.title}
+              </h3>
+              <p className={`text-xs font-normal leading-relaxed transition-colors duration-500 ${isTextRight ? 'text-slate-500' : 'text-teal-50 drop-shadow-sm'}`}>
+                {hero.description}
               </p>
               <button 
                 onClick={(e) => {
                   e.stopPropagation();
-                  onNavigate('telemed');
+                  onNavigate(hero.screen);
                 }}
-                className="mt-1 px-3 py-1.5 rounded-full bg-white text-[#008779] text-xs font-medium shadow-sm hover:bg-teal-50 transition-all flex items-center gap-1 active:scale-95"
+                className={`mt-1 px-3 py-1.5 rounded-full text-xs font-medium shadow-sm transition-all inline-flex items-center gap-1 active:scale-95 ${
+                  isTextRight
+                    ? 'bg-[#008779] text-white hover:bg-[#006e63]'
+                    : 'bg-white text-[#008779] hover:bg-teal-50'
+                }`}
               >
-                <span>Falar com veterinário</span>
+                <span>{hero.action}</span>
               </button>
             </div>
-
-            {/* Dog Illustration / Photo with 24h badge */}
-            <div className="relative w-26 h-26 shrink-0 flex items-center justify-center">
-              <img
-                src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=300&auto=format&fit=crop&q=80"
-                alt="Veterinário 24h"
-                className="w-22 h-22 rounded-2xl object-cover ring-2 ring-white/40 shadow-md"
-              />
-              <div className="absolute -bottom-1 -left-1 bg-sky-500 text-white rounded-full p-1.5 shadow-md flex items-center justify-center ring-2 ring-white">
-                <PhoneCall className="w-3.5 h-3.5" />
-              </div>
-            </div>
+          </div>
+          <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-0.5">
+            {heroSlides.map((slide, index) => (
+              <button
+                key={slide.id}
+                type="button"
+                aria-label={`Ver destaque ${index + 1}`}
+                onPointerDown={(event) => {
+                  event.stopPropagation();
+                  setActiveSlide(index);
+                }}
+                onClick={(event) => event.stopPropagation()}
+                className="h-4 w-4 rounded-full flex items-center justify-center transition-all active:scale-95"
+              >
+                <span className={`h-1.5 rounded-full transition-all ${
+                  index === activeSlide
+                    ? 'w-4 bg-white shadow-sm'
+                    : 'w-1.5 bg-white/55'
+                }`} />
+              </button>
+            ))}
+          </div>
+          <div className={`absolute bottom-3 z-10 ${isTextRight ? 'left-4' : 'right-4'} bg-white/90 text-[#008779] rounded-full p-1.5 shadow-md flex items-center justify-center ring-2 ring-white/60`}>
+            <HeroIcon className="w-3.5 h-3.5" />
           </div>
         </div>
 

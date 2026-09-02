@@ -1,42 +1,83 @@
 import React, { useState } from 'react';
 import { 
-  User, 
   Settings, 
   ShieldCheck, 
   MapPin, 
-  Heart, 
   Bell, 
   HelpCircle, 
-  FileText, 
   LogOut, 
   ChevronRight, 
   Plus, 
-  Lock, 
-  Moon, 
-  Smartphone, 
-  Check, 
-  Phone,
   Edit3,
-  Sliders
+  PawPrint,
+  X,
+  Camera
 } from 'lucide-react';
-import { CURRENT_USER, MY_PET } from '../data/mockData';
+import { CURRENT_USER } from '../data/mockData';
 import { TopBar } from '../components/TopBar';
-import { ScreenId } from '../types';
+import { Pet, ScreenId } from '../types';
 
 interface ProfileScreenProps {
   onBack: () => void;
   onNavigate: (screen: ScreenId) => void;
+  pets: Pet[];
+  onAddPet: (pet: Pet) => void;
 }
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = ({
   onBack,
   onNavigate,
+  pets,
+  onAddPet,
 }) => {
   const [activeTab, setActiveTab] = useState<'perfil' | 'config'>('perfil');
   const [pushEnabled, setPushEnabled] = useState(true);
   const [whatsappAlerts, setWhatsappAlerts] = useState(true);
   const [lostPetRadar, setLostPetRadar] = useState(true);
-  const [biometrics, setBiometrics] = useState(true);
+  const [isAddPetOpen, setIsAddPetOpen] = useState(false);
+  const [petName, setPetName] = useState('');
+  const [petBreed, setPetBreed] = useState('');
+  const [petSpecies, setPetSpecies] = useState<'dog' | 'cat'>('dog');
+  const [petPhoto, setPetPhoto] = useState('');
+
+  const defaultPetPhoto = petSpecies === 'dog'
+    ? 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=300&auto=format&fit=crop&q=80'
+    : 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&auto=format&fit=crop&q=80';
+
+  const handlePetPhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setPetPhoto(URL.createObjectURL(file));
+  };
+
+  const handleAddPet = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newPet: Pet = {
+      id: `pet-${Date.now()}`,
+      name: petName.trim(),
+      species: petSpecies,
+      breed: petBreed.trim() || 'SRD',
+      age: 'Cadastro novo',
+      gender: 'Macho',
+      photo: petPhoto || defaultPetPhoto,
+      tutorName: CURRENT_USER.name,
+      vaccinesStatus: 'Pendente',
+      nextVaccine: 'Avaliar na primeira visita',
+      description: 'Pet recém-cadastrado no perfil.',
+      vaccinated: false,
+      neutered: false,
+      microchipped: false,
+      tags: ['Novo cadastro'],
+    };
+
+    onAddPet(newPet);
+    setPetName('');
+    setPetBreed('');
+    setPetSpecies('dog');
+    setPetPhoto('');
+    setIsAddPetOpen(false);
+  };
 
   return (
     <div className="flex-1 flex flex-col bg-[#f8fafc] overflow-y-auto custom-scrollbar">
@@ -127,7 +168,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               <div className="flex items-center justify-between">
                 <h4 className="text-xs font-medium text-slate-700">Meus Pets Cadastrados</h4>
                 <button
-                  onClick={() => onNavigate('wallet')}
+                  onClick={() => setIsAddPetOpen(true)}
                   className="text-[11px] font-medium text-[#008779] flex items-center gap-1"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -135,26 +176,31 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
                 </button>
               </div>
 
-              <div
-                onClick={() => onNavigate('wallet')}
-                className="p-3 rounded-2xl bg-white border border-slate-100 shadow-xs hover:border-teal-200 transition-all flex items-center justify-between cursor-pointer"
-              >
-                <div className="flex items-center gap-3">
-                  <img
-                    src={MY_PET.photo}
-                    alt={MY_PET.name}
-                    className="w-11 h-11 rounded-xl object-cover"
-                  />
-                  <div>
-                    <h5 className="text-xs font-medium text-slate-800">{MY_PET.name}</h5>
-                    <p className="text-[11px] text-slate-400 font-normal">
-                      {MY_PET.breed} • <span className="text-emerald-600 font-medium">{MY_PET.vaccinesStatus}</span>
-                    </p>
+              <div className="space-y-2">
+                {pets.map((pet) => (
+                  <div
+                    key={pet.id}
+                    onClick={() => onNavigate('wallet')}
+                    className="p-3 rounded-2xl bg-white border border-slate-100 shadow-xs hover:border-teal-200 transition-all flex items-center justify-between cursor-pointer"
+                  >
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={pet.photo}
+                        alt={pet.name}
+                        className="w-11 h-11 rounded-xl object-cover"
+                      />
+                      <div>
+                        <h5 className="text-xs font-medium text-slate-800">{pet.name}</h5>
+                        <p className="text-[11px] text-slate-400 font-normal">
+                          {pet.breed} • <span className={`font-medium ${pet.vaccinesStatus === 'Em dia' ? 'text-emerald-600' : 'text-amber-600'}`}>{pet.vaccinesStatus}</span>
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-medium text-[#008779] bg-teal-50 px-2.5 py-1 rounded-lg">
+                      Ver Carteira
+                    </span>
                   </div>
-                </div>
-                <span className="text-xs font-medium text-[#008779] bg-teal-50 px-2.5 py-1 rounded-lg">
-                  Ver Carteira
-                </span>
+                ))}
               </div>
             </div>
 
@@ -183,12 +229,12 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               </button>
 
               <button
-                onClick={() => alert('Fale com a Coordenação de Bem-Estar Animal de Araucária pelo WhatsApp (41) 3642-0000')}
+                onClick={() => onNavigate('support')}
                 className="w-full p-3.5 flex items-center justify-between hover:bg-slate-50 text-left transition-colors"
               >
                 <div className="flex items-center gap-3 text-slate-700">
                   <HelpCircle className="w-4 h-4 text-[#008779]" />
-                  <span className="text-xs font-normal">Central de Atendimento CCZ Araucária</span>
+                  <span className="text-xs font-normal">Suporte por Chat</span>
                 </div>
                 <ChevronRight className="w-4 h-4 text-slate-400" />
               </button>
@@ -265,51 +311,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               </div>
             </div>
 
-            {/* Segurança & Acesso */}
-            <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-3">
-              <h4 className="text-xs font-medium text-slate-800 flex items-center gap-1.5">
-                <Lock className="w-4 h-4 text-[#008779]" />
-                Segurança e Acesso
-              </h4>
-
-              {/* Biometrics */}
-              <div className="flex items-center justify-between pt-1">
-                <div>
-                  <p className="text-xs font-medium text-slate-700">Acesso por Biometria / Face ID</p>
-                  <p className="text-[10px] text-slate-400 font-normal">Entrar com segurança sem digitar senha</p>
-                </div>
-                <button
-                  onClick={() => setBiometrics(!biometrics)}
-                  className={`w-10 h-5 rounded-full transition-colors relative p-0.5 ${
-                    biometrics ? 'bg-[#008779]' : 'bg-slate-300'
-                  }`}
-                >
-                  <div
-                    className={`w-4 h-4 rounded-full bg-white shadow-md transform transition-transform ${
-                      biometrics ? 'translate-x-5' : 'translate-x-0'
-                    }`}
-                  />
-                </button>
-              </div>
-
-              {/* Change Password */}
-              <button
-                onClick={() => alert('Link para alteração de senha enviado ao seu e-mail!')}
-                className="w-full pt-2 border-t border-slate-100 flex items-center justify-between text-left"
-              >
-                <span className="text-xs font-normal text-slate-700">Alterar Senha</span>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
-              </button>
-
-              {/* Gov.br Integration */}
-              <div className="w-full pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="font-normal text-slate-700">Conta Gov.br</span>
-                <span className="px-2 py-0.5 bg-blue-50 text-blue-700 font-medium rounded-md text-[10px]">
-                  Vinculada
-                </span>
-              </div>
-            </div>
-
             {/* Informações Oficiais & CCZ */}
             <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-2 text-xs">
               <h4 className="font-medium text-slate-800">Prefeitura de Araucária</h4>
@@ -333,6 +334,113 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
           <span>Sair da Conta</span>
         </button>
       </div>
+
+      {isAddPetOpen && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="w-full max-w-sm bg-white rounded-3xl overflow-hidden shadow-2xl">
+            <div className="bg-gradient-to-r from-[#008779] to-[#006e63] p-5 text-white flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+                  <PawPrint className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-base">Adicionar Pet</h3>
+                  <p className="text-xs text-teal-100">Cadastro rápido</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsAddPetOpen(false)}
+                className="p-1 rounded-full hover:bg-white/20 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <form onSubmit={handleAddPet} className="p-5 space-y-3">
+              <div>
+                <label className="text-xs font-medium text-slate-700 block mb-1.5">Foto do pet</label>
+                <label className="group relative flex min-h-[112px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-dashed border-teal-300 bg-teal-50/50 transition-all hover:bg-teal-50 active:scale-[0.99]">
+                  {petPhoto ? (
+                    <>
+                      <img
+                        src={petPhoto}
+                        alt="Prévia da foto do pet"
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/25 opacity-0 transition-opacity group-hover:opacity-100" />
+                      <div className="relative z-10 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-medium text-[#008779] shadow-sm opacity-0 transition-opacity group-hover:opacity-100">
+                        Trocar foto
+                      </div>
+                    </>
+                  ) : (
+                    <div className="flex flex-col items-center gap-2 text-center">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#008779] shadow-xs">
+                        <Camera className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-medium text-[#008779]">Adicionar foto do pet</p>
+                        <p className="text-[10px] font-normal text-slate-400">
+                          Toque para abrir a câmera ou escolher imagem
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    onChange={handlePetPhotoChange}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+
+              <div>
+                <label className="text-xs font-medium text-slate-700 block mb-1">Nome do pet</label>
+                <input
+                  type="text"
+                  required
+                  value={petName}
+                  onChange={(e) => setPetName(e.target.value)}
+                  placeholder="Ex: Mel, Thor, Luna..."
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#008779]"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="text-xs font-medium text-slate-700 block mb-1">Espécie</label>
+                  <select
+                    value={petSpecies}
+                    onChange={(e) => setPetSpecies(e.target.value as 'dog' | 'cat')}
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#008779] bg-white"
+                  >
+                    <option value="dog">Cachorro</option>
+                    <option value="cat">Gato</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-slate-700 block mb-1">Raça</label>
+                  <input
+                    type="text"
+                    value={petBreed}
+                    onChange={(e) => setPetBreed(e.target.value)}
+                    placeholder="SRD"
+                    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#008779]"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-xs shadow-md transition-colors"
+              >
+                Salvar pet
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

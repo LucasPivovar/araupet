@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
-import { X, Calendar, MapPin, CheckCircle, Clock, PawPrint } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { X, Calendar, CheckCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { CampaignLocation } from '../../types';
 import { CAMPAIGN_LOCATIONS } from '../../data/mockData';
 
 interface ScheduleModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialType?: 'vacinacao' | 'castracao';
+  initialLocationId?: string;
+  lockLocation?: boolean;
 }
 
 export const ScheduleModal: React.FC<ScheduleModalProps> = ({
   isOpen,
   onClose,
   initialType = 'vacinacao',
+  initialLocationId,
+  lockLocation = false,
 }) => {
-  const [type, setType] = useState<'vacinacao' | 'castracao'>(initialType);
-  const [selectedLocation, setSelectedLocation] = useState<string>(CAMPAIGN_LOCATIONS[0].id);
+  const [selectedLocation, setSelectedLocation] = useState<string>(initialLocationId ?? CAMPAIGN_LOCATIONS[0].id);
   const [selectedTime, setSelectedTime] = useState<string>('09:30');
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const selectedLocationData = useMemo(
+    () => CAMPAIGN_LOCATIONS.find((loc) => loc.id === selectedLocation) ?? CAMPAIGN_LOCATIONS[0],
+    [selectedLocation]
+  );
 
   if (!isOpen) return null;
 
@@ -77,15 +84,15 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
             <div className="bg-slate-50 rounded-2xl p-3.5 text-left text-xs space-y-1.5 border border-slate-200">
               <div className="flex justify-between">
                 <span className="text-slate-500">Serviço:</span>
-                <span className="font-medium text-slate-800 uppercase">{type === 'vacinacao' ? 'Vacinação Antirrábica' : 'Castração Gratuita'}</span>
+                <span className="font-medium text-slate-800 uppercase">{initialType === 'vacinacao' ? 'Vacinação Antirrábica' : 'Castração Gratuita'}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Local:</span>
-                <span className="font-medium text-slate-800">USF Iguaçu</span>
+                <span className="font-medium text-slate-800 text-right">{selectedLocationData.name}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Horário:</span>
-                <span className="font-medium text-[#008779]">24 MAI às {selectedTime}</span>
+                <span className="font-medium text-[#008779]">{selectedLocationData.dateStr} às {selectedTime}</span>
               </div>
             </div>
 
@@ -98,35 +105,16 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
           </div>
         ) : (
           <div className="p-5 space-y-3.5 max-h-[70vh] overflow-y-auto custom-scrollbar">
-            {/* Service Toggle */}
-            <div>
-              <label className="text-xs font-medium text-slate-700 block mb-1.5">
-                Tipo de Atendimento
-              </label>
-              <div className="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-xl">
-                <button
-                  type="button"
-                  onClick={() => setType('vacinacao')}
-                  className={`py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    type === 'vacinacao'
-                      ? 'bg-white text-[#008779] shadow-xs'
-                      : 'text-slate-600'
-                  }`}
-                >
-                  Vacinação
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setType('castracao')}
-                  className={`py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    type === 'castracao'
-                      ? 'bg-white text-[#008779] shadow-xs'
-                      : 'text-slate-600'
-                  }`}
-                >
-                  Castração
-                </button>
-              </div>
+            <div className="p-3 rounded-2xl bg-teal-50/70 border border-teal-100">
+              <p className="text-[10px] font-medium text-[#008779] uppercase tracking-wide">
+                Atendimento selecionado
+              </p>
+              <h4 className="text-sm font-semibold text-slate-800 mt-0.5">
+                {initialType === 'vacinacao' ? 'Vacinação Antirrábica' : 'Castração Gratuita'}
+              </h4>
+              <p className="text-[11px] text-slate-500 font-normal mt-1">
+                {selectedLocationData.name} • {selectedLocationData.neighborhood}
+              </p>
             </div>
 
             {/* Pet Selector */}
@@ -152,8 +140,17 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
               <label className="text-xs font-medium text-slate-700 block mb-1.5">
                 Escolha a Unidade / Ponto de Ação
               </label>
-              <div className="space-y-1.5">
-                {CAMPAIGN_LOCATIONS.map((loc) => (
+              {lockLocation ? (
+                <div className="p-2.5 rounded-xl text-left border border-[#008779] bg-teal-50/60 text-xs">
+                  <p className="font-medium text-slate-800">{selectedLocationData.name}</p>
+                  <p className="text-[11px] text-slate-500 font-normal">{selectedLocationData.address}</p>
+                  <span className="inline-flex mt-2 text-[11px] font-medium text-[#008779] bg-white px-2 py-0.5 rounded-md border border-teal-100">
+                    {selectedLocationData.dateStr}
+                  </span>
+                </div>
+              ) : (
+                <div className="space-y-1.5">
+                  {CAMPAIGN_LOCATIONS.map((loc) => (
                   <button
                     key={loc.id}
                     type="button"
@@ -172,8 +169,9 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
                       {loc.dateStr}
                     </span>
                   </button>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Time Slot */}

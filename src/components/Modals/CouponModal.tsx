@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Check, Copy, MapPin, Phone, Star } from 'lucide-react';
+import { X, Check, MapPin, Phone, Star } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Partner } from '../../types';
 
@@ -14,21 +14,24 @@ export const CouponModal: React.FC<CouponModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const [copied, setCopied] = useState(false);
+  const [couponGenerated, setCouponGenerated] = useState(false);
 
   if (!isOpen || !partner) return null;
 
-  const couponCode = `ARAUPET-${partner.name.split(' ')[0].toUpperCase()}`;
+  const couponCode = `AP-${partner.id.toUpperCase()}-${new Date().getFullYear()}`;
 
-  const handleCopy = () => {
-    navigator.clipboard?.writeText?.(couponCode);
-    setCopied(true);
+  const handleGenerate = () => {
+    setCouponGenerated(true);
     confetti({
       particleCount: 50,
       spread: 40,
       origin: { y: 0.7 },
     });
-    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleClose = () => {
+    setCouponGenerated(false);
+    onClose();
   };
 
   return (
@@ -44,7 +47,7 @@ export const CouponModal: React.FC<CouponModalProps> = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
           
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-3 right-3 p-1.5 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors backdrop-blur-xs"
           >
             <X className="w-4 h-4" />
@@ -74,26 +77,39 @@ export const CouponModal: React.FC<CouponModalProps> = ({
             <p className="text-xs font-medium text-slate-700">
               Válido para {partner.discountTarget}
             </p>
-            <p className="text-[10px] text-slate-400 font-normal">Exclusivo para moradores cadastrados no ArauPet</p>
+            <p className="text-[10px] text-slate-400 font-normal">
+              Gere o código no app e informe ao parceiro no atendimento.
+            </p>
           </div>
 
           {/* Coupon Box */}
           <div>
             <label className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block mb-1">
-              Código do Cupom de Desconto
+              Código para validação no parceiro
             </label>
-            <div className="flex items-center justify-between p-2.5 rounded-xl border-2 border-dashed border-teal-300 bg-teal-50/30">
-              <span className="font-mono text-xs font-medium text-[#008779] tracking-wider">
-                {couponCode}
-              </span>
+            {couponGenerated ? (
+              <div className="p-3 rounded-xl border-2 border-dashed border-teal-300 bg-teal-50/30 space-y-2">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-mono text-xs font-medium text-[#008779] tracking-wider">
+                    {couponCode}
+                  </span>
+                  <span className="px-2 py-1 rounded-lg bg-emerald-100 text-emerald-700 text-[10px] font-medium flex items-center gap-1">
+                    <Check className="w-3 h-3" />
+                    Gerado
+                  </span>
+                </div>
+                <p className="text-[10px] text-slate-500 leading-relaxed">
+                  Mostre este código ao parceiro para aplicar o desconto e registrar o uso.
+                </p>
+              </div>
+            ) : (
               <button
-                onClick={handleCopy}
-                className="px-3 py-1.5 rounded-lg bg-[#008779] text-white text-xs font-medium flex items-center gap-1.5 active:scale-95 transition-all"
+                onClick={handleGenerate}
+                className="w-full py-2.5 rounded-xl bg-[#008779] text-white text-xs font-medium active:scale-95 transition-all"
               >
-                {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                {copied ? 'Copiado!' : 'Copiar'}
+                Gerar cupom
               </button>
-            </div>
+            )}
           </div>
 
           {/* Benefits */}

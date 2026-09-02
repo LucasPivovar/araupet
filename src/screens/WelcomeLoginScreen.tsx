@@ -3,19 +3,14 @@ import {
   ArrowRight,
   Eye,
   EyeOff,
-  Heart,
   Lock,
   Mail,
   UserPlus,
   X,
-  KeyRound,
-  CheckCircle2,
-  ExternalLink,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { TopBar } from '../components/TopBar';
 import loginIllustration from '../assets/login-illustration.png';
-import prefeituraLogo from '../assets/prefeitura-araucaria-brasao.jpg';
 
 interface WelcomeLoginScreenProps {
   onLoginSuccess: () => void;
@@ -25,10 +20,7 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
   onLoginSuccess,
 }) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showForgotModal, setShowForgotModal] = useState(false);
-  const [forgotEmail, setForgotEmail] = useState('juliana.lima@email.com');
-  const [forgotSent, setForgotSent] = useState(false);
-  const [isForgotLoading, setIsForgotLoading] = useState(false);
+  const [forgotNotice, setForgotNotice] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('juliana.lima@email.com');
   const [password, setPassword] = useState('••••••••');
@@ -69,49 +61,31 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
       {/* Top Bar / Notch Area */}
       <TopBar showBack={false} transparent={true} darkIcons={true} />
 
-      <div className="px-6 pt-5 pb-4 flex-1 flex flex-col max-w-md mx-auto w-full min-h-0 overflow-y-auto no-scrollbar">
-        {/* Centered Prefeitura de Araucária with top padding */}
-        <div className="flex items-center justify-center gap-2.5 pt-1 pb-2">
-          <img
-            src={prefeituraLogo}
-            alt="Brasão da Prefeitura de Araucária"
-            className="w-8 h-8 object-contain shrink-0"
-          />
-          <div className="text-left">
-            <p className="text-[10px] font-normal text-slate-500 leading-tight">Prefeitura de</p>
-            <h1 className="text-sm font-semibold text-slate-800 leading-none tracking-tight">
-              Araucária
-            </h1>
-          </div>
-        </div>
+      <div className="px-6 pt-4 pb-5 flex-1 flex flex-col max-w-md mx-auto w-full min-h-0 overflow-hidden">
+        <div className="relative mb-4 flex flex-1 min-h-0 flex-col items-center justify-center overflow-hidden rounded-[28px] border border-teal-100/80 bg-gradient-to-b from-teal-50/90 via-white to-white shadow-inner">
+          <div className="absolute left-4 top-8 h-16 w-16 rounded-full border border-teal-100 bg-white/60" />
+          <div className="absolute right-4 bottom-8 h-20 w-20 rounded-full border border-teal-100 bg-white/70" />
 
-        {/* Card do Cachorro / Gato com Logo ArauPet em Montserrat */}
-        <div className="relative mt-1 mb-3 flex flex-col items-center justify-center shrink-0">
-          <div className="absolute inset-x-1 top-0 bottom-0 rounded-[28px] bg-gradient-to-b from-teal-50/90 via-white to-teal-50/70 border border-teal-100/80 shadow-inner" />
-          <div className="absolute left-2 top-10 h-14 w-14 rounded-full border border-teal-100 bg-white/60" />
-          <div className="absolute right-3 bottom-6 h-16 w-16 rounded-full border border-teal-100 bg-white/70" />
-          
-          {/* Logo ArauPet em Montserrat Grande e posicionado mais pra baixo */}
-          <div className="relative z-10 pt-9 pb-1 flex flex-col items-center justify-center text-center">
-            <h2 className="text-3xl sm:text-4xl font-extrabold font-montserrat tracking-tight leading-none inline-flex items-center justify-center">
+          <div className="relative z-10 flex flex-col items-center justify-center text-center">
+            <h1 className="text-4xl font-extrabold font-montserrat tracking-tight leading-none inline-flex items-center justify-center">
               <span className="text-slate-800">Arau</span>
               <span className="text-[#008779]">Pet</span>
-            </h2>
+            </h1>
             <p className="text-[10px] font-semibold font-montserrat text-slate-400 tracking-widest uppercase mt-1">
-              Saúde & Bem-Estar Animal
+              Saude e bem-estar animal
             </p>
           </div>
 
           <img
             src={loginIllustration}
             alt="Cão e gato com paisagem de Araucária"
-            className="relative w-full max-w-[300px] h-[200px] object-contain mt-1"
+            className="relative z-10 w-full max-w-[330px] h-[255px] object-contain mt-2"
           />
         </div>
 
         {/* Bottom Section: Login */}
-        <div className="space-y-3.5 shrink-0">
-          <form onSubmit={handleLogin} className="space-y-3">
+        <div className="space-y-4 shrink-0">
+          <form onSubmit={handleLogin} className="space-y-3.5">
             <div className="space-y-1">
               <label className="text-xs font-medium text-slate-700 block">
                 E-mail ou CPF
@@ -168,15 +142,19 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  setForgotEmail(email || 'juliana.lima@email.com');
-                  setForgotSent(false);
-                  setShowForgotModal(true);
+                  setForgotNotice(true);
                 }}
                 className="font-medium text-[#008779] hover:underline"
               >
                 Esqueci minha senha
               </button>
             </div>
+
+            {forgotNotice && (
+              <div className="rounded-xl border border-teal-100 bg-teal-50 px-3 py-2 text-[11px] leading-relaxed text-slate-600">
+                Enviamos as instrucoes de recuperacao para o e-mail informado.
+              </div>
+            )}
 
             <button
               type="submit"
@@ -207,146 +185,6 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
         </div>
       </div>
 
-      {/* Esqueci Minha Senha Modal */}
-      {showForgotModal && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="w-full max-w-sm bg-white rounded-3xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-200">
-            {/* Header */}
-            <div className="bg-gradient-to-r from-[#008779] to-[#006e63] p-4.5 text-white flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
-                  <KeyRound className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-sm">Recuperar Senha</h3>
-                  <p className="text-xs text-teal-100 font-normal">Prefeitura de Araucária</p>
-                </div>
-              </div>
-              <button
-                onClick={() => {
-                  setShowForgotModal(false);
-                  setForgotSent(false);
-                }}
-                className="p-1 rounded-full hover:bg-white/20 transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            {!forgotSent ? (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setIsForgotLoading(true);
-                  setTimeout(() => {
-                    setIsForgotLoading(false);
-                    setForgotSent(true);
-                    confetti({
-                      particleCount: 70,
-                      spread: 60,
-                      origin: { y: 0.6 },
-                    });
-                  }, 600);
-                }}
-                className="p-5 space-y-3.5"
-              >
-                <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                  Digite o e-mail cadastrado no seu perfil do <strong>ArauPet</strong>. Você receberá um link seguro para criar uma nova senha.
-                </p>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-medium text-slate-700 block">
-                    Seu E-mail Cadastrado
-                  </label>
-                  <div className="relative flex items-center">
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none" />
-                    <input
-                      type="email"
-                      required
-                      value={forgotEmail}
-                      onChange={(e) => setForgotEmail(e.target.value)}
-                      placeholder="seu.email@exemplo.com"
-                      className="w-full pl-10 pr-3.5 py-2.5 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 shadow-xs focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15 font-normal"
-                    />
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isForgotLoading}
-                  className="w-full py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-xs shadow-md shadow-[#008779]/20 transition-all flex items-center justify-center gap-2 active:scale-[0.99] mt-2"
-                >
-                  {isForgotLoading ? (
-                    <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <>
-                      <span>Enviar Link de Recuperação</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setShowForgotModal(false)}
-                  className="w-full text-center text-xs font-medium text-slate-500 hover:text-slate-800 pt-1"
-                >
-                  Voltar para o Login
-                </button>
-              </form>
-            ) : (
-              /* Success / Email Sent Screen */
-              <div className="p-6 text-center space-y-4">
-                <div className="w-14 h-14 bg-teal-50 text-[#008779] rounded-full flex items-center justify-center mx-auto ring-8 ring-teal-50/50">
-                  <Mail className="w-7 h-7" />
-                </div>
-
-                <div className="space-y-1">
-                  <h4 className="text-base font-semibold text-slate-800">
-                    E-mail Enviado!
-                  </h4>
-                  <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                    Enviamos as instruções e o link seguro de recuperação para:
-                  </p>
-                  <p className="text-xs font-semibold text-[#008779] bg-teal-50/80 px-3 py-1.5 rounded-lg border border-teal-100 inline-block">
-                    {forgotEmail}
-                  </p>
-                </div>
-
-                <p className="text-[11px] text-slate-400 font-normal">
-                  Verifique sua caixa de entrada e spam nos próximos minutos.
-                </p>
-
-                <div className="space-y-2 pt-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      window.open(`mailto:${forgotEmail}`);
-                    }}
-                    className="w-full py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-xs shadow-md shadow-[#008779]/20 transition-all flex items-center justify-center gap-2 active:scale-[0.99]"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Abrir aplicativo de E-mail</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setShowForgotModal(false);
-                      setForgotSent(false);
-                    }}
-                    className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-medium text-xs transition-colors"
-                  >
-                    Concluir e Voltar ao Login
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
       {/* Quick Register Modal */}
       {showRegisterModal && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
@@ -358,7 +196,7 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
                 </div>
                 <div>
                   <h3 className="font-semibold text-base">Novo Cadastro</h3>
-                  <p className="text-xs text-teal-100 font-normal">Prefeitura de Araucária</p>
+                  <p className="text-xs text-teal-100 font-normal">Crie seu acesso ao ArauPet</p>
                 </div>
               </div>
               <button

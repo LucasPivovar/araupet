@@ -11,7 +11,10 @@ import { LostFoundScreen } from '../screens/LostFoundScreen';
 import { PartnersScreen } from '../screens/PartnersScreen';
 import { AlertsScreen } from '../screens/AlertsScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
+import { SupportChatScreen } from '../screens/SupportChatScreen';
 import { Sparkles, Maximize2, RotateCcw } from 'lucide-react';
+import { MY_PET } from '../data/mockData';
+import { Pet } from '../types';
 
 interface InteractiveAppViewProps {
   currentScreen: ScreenId;
@@ -22,6 +25,8 @@ export const InteractiveAppView: React.FC<InteractiveAppViewProps> = ({
   currentScreen,
   onNavigate,
 }) => {
+  const [registeredPets, setRegisteredPets] = useState<Pet[]>([MY_PET]);
+
   // Map screen to bottom nav tab
   const getActiveTab = (): NavTabId => {
     switch (currentScreen) {
@@ -38,6 +43,7 @@ export const InteractiveAppView: React.FC<InteractiveAppViewProps> = ({
       case 'alerts':
         return 'alertas';
       case 'profile':
+      case 'support':
         return 'perfil';
       default:
         return 'inicio';
@@ -70,7 +76,13 @@ export const InteractiveAppView: React.FC<InteractiveAppViewProps> = ({
       case 'home':
         return <HomeScreen onNavigate={onNavigate} />;
       case 'wallet':
-        return <PetWalletScreen onBack={() => onNavigate('home')} />;
+        return (
+          <PetWalletScreen
+            onBack={() => onNavigate('home')}
+            pets={registeredPets}
+            onAddPet={(pet) => setRegisteredPets((current) => [...current, pet])}
+          />
+        );
       case 'telemed':
         return <TelemedicineScreen onBack={() => onNavigate('home')} />;
       case 'vaccines':
@@ -84,7 +96,16 @@ export const InteractiveAppView: React.FC<InteractiveAppViewProps> = ({
       case 'alerts':
         return <AlertsScreen onBack={() => onNavigate('home')} onNavigate={onNavigate} />;
       case 'profile':
-        return <ProfileScreen onBack={() => onNavigate('home')} onNavigate={onNavigate} />;
+        return (
+          <ProfileScreen
+            onBack={() => onNavigate('home')}
+            onNavigate={onNavigate}
+            pets={registeredPets}
+            onAddPet={(pet) => setRegisteredPets((current) => [...current, pet])}
+          />
+        );
+      case 'support':
+        return <SupportChatScreen onBack={() => onNavigate('profile')} />;
       default:
         return <HomeScreen onNavigate={onNavigate} />;
     }

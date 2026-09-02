@@ -10,7 +10,8 @@ export type ScreenId =
   | 'partners' 
   | 'alerts'
   | 'profile'
-  | 'settings';
+  | 'settings'
+  | 'support';
 
 export type NavTabId = 'inicio' | 'servicos' | 'carteira' | 'alertas' | 'perfil';
 
@@ -43,6 +44,8 @@ export interface CampaignLocation {
   dayOfWeek: string; // "Sábado • 8h às 14h"
   name: string; // "USF Iguaçu"
   address: string; // "Rua Iguaçu, 283 - Iguaçu"
+  neighborhood: string;
+  serviceTypes: Array<'vacinacao' | 'castracao'>;
   distance: string; // "1,2 km"
   lat: number;
   lng: number;
