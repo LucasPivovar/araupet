@@ -21,11 +21,13 @@ import homeBannerPartners from '../assets/home-banner-partners.png';
 interface HomeScreenProps {
   onNavigate: (screen: ScreenId) => void;
   unreadCount?: number;
+  currentUser?: typeof CURRENT_USER;
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({
   onNavigate,
   unreadCount = 2,
+  currentUser = CURRENT_USER,
 }) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -152,8 +154,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <div className="flex items-center gap-3">
             <div className="relative">
               <img
-                src={CURRENT_USER.avatar}
-                alt={CURRENT_USER.name}
+                src={currentUser.avatar}
+                alt={currentUser.name}
                 className="w-11 h-11 rounded-full object-cover ring-2 ring-[#008779]/20"
               />
               <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full ring-2 ring-white" />
@@ -161,7 +163,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <div>
               <div className="flex items-center gap-1">
                 <h2 className="text-[15px] font-medium text-slate-800 tracking-tight">
-                  Olá, {CURRENT_USER.firstName}! 👋
+                  Olá, {currentUser.firstName}! 👋
                 </h2>
               </div>
               <p className="text-xs text-slate-400 font-normal">

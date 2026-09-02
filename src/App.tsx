@@ -12,13 +12,14 @@ import { PartnersScreen } from './screens/PartnersScreen';
 import { AlertsScreen } from './screens/AlertsScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
 import { SupportChatScreen } from './screens/SupportChatScreen';
-import { MY_PET } from './data/mockData';
+import { CURRENT_USER, MY_PET } from './data/mockData';
 import { Pet } from './types';
 
 export function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('login');
   const [unreadAlerts, setUnreadAlerts] = useState<number>(2);
   const [registeredPets, setRegisteredPets] = useState<Pet[]>([MY_PET]);
+  const [currentUser, setCurrentUser] = useState<typeof CURRENT_USER>(CURRENT_USER);
 
   // Map screen to bottom nav tab
   const getActiveTab = (): NavTabId => {
@@ -64,13 +65,23 @@ export function App() {
     }
   };
 
+  const handleLoginSuccess = (user?: typeof CURRENT_USER, pets?: Pet[]) => {
+    if (user) {
+      setCurrentUser(user);
+    }
+    if (pets && pets.length > 0) {
+      setRegisteredPets(pets);
+    }
+    setCurrentScreen('home');
+  };
+
   const renderScreen = () => {
     switch (currentScreen) {
       case 'login':
       case 'register':
         return (
           <WelcomeLoginScreen
-            onLoginSuccess={() => setCurrentScreen('home')}
+            onLoginSuccess={handleLoginSuccess}
           />
         );
 
@@ -79,6 +90,7 @@ export function App() {
           <HomeScreen
             onNavigate={setCurrentScreen}
             unreadCount={unreadAlerts}
+            currentUser={currentUser}
           />
         );
       case 'wallet':
@@ -114,6 +126,7 @@ export function App() {
             onNavigate={setCurrentScreen}
             pets={registeredPets}
             onAddPet={(pet) => setRegisteredPets((current) => [...current, pet])}
+            currentUser={currentUser}
           />
         );
       case 'support':
@@ -123,6 +136,7 @@ export function App() {
           <HomeScreen
             onNavigate={setCurrentScreen}
             unreadCount={unreadAlerts}
+            currentUser={currentUser}
           />
         );
     }

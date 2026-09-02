@@ -22,6 +22,7 @@ interface ProfileScreenProps {
   onNavigate: (screen: ScreenId) => void;
   pets: Pet[];
   onAddPet: (pet: Pet) => void;
+  currentUser?: typeof CURRENT_USER;
 }
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = ({
@@ -29,6 +30,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
   onNavigate,
   pets,
   onAddPet,
+  currentUser = CURRENT_USER,
 }) => {
   const [activeTab, setActiveTab] = useState<'perfil' | 'config'>('perfil');
   const [pushEnabled, setPushEnabled] = useState(true);
@@ -134,8 +136,8 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
             <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs flex items-center gap-3.5">
               <div className="relative">
                 <img
-                  src={CURRENT_USER.avatar}
-                  alt={CURRENT_USER.name}
+                  src={currentUser.avatar}
+                  alt={currentUser.name}
                   className="w-14 h-14 rounded-full object-cover ring-2 ring-[#008779]/30"
                 />
                 <button
@@ -149,16 +151,16 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
                   <h3 className="text-sm font-semibold text-slate-800 truncate">
-                    {CURRENT_USER.name}
+                    {currentUser.name}
                   </h3>
                   <span className="text-[10px] font-medium bg-teal-100 text-[#008779] px-1.5 py-0.5 rounded">
-                    Cidadã Araucária
+                    Cidadão(ã) Araucária
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 font-normal truncate">{CURRENT_USER.email}</p>
+                <p className="text-xs text-slate-400 font-normal truncate">{currentUser.email}</p>
                 <p className="text-[11px] text-slate-500 font-normal flex items-center gap-1 mt-0.5">
                   <MapPin className="w-3 h-3 text-[#008779]" />
-                  <span>{CURRENT_USER.city}</span>
+                  <span>{currentUser.city}</span>
                 </p>
               </div>
             </div>
