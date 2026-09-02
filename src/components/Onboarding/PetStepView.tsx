@@ -64,7 +64,7 @@ export const PetStepView: React.FC<PetStepViewProps> = ({
                     <h4 className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
                       <span>{p.name}</span>
                       <span className="text-[10px] font-normal text-slate-500">
-                        ({p.species === 'dog' ? 'Cachorro' : 'Gato'})
+                        ({p.species === 'dog' ? 'Cachorro' : p.species === 'cat' ? 'Gato' : 'Pet'})
                       </span>
                     </h4>
                     <p className="text-[11px] text-slate-500 font-normal">
