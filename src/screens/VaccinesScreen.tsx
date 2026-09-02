@@ -3,7 +3,7 @@ import {
   Calendar, 
   MapPin, 
   Bell, 
-  Scissors, 
+  ShieldCheck, 
   Syringe, 
   ChevronRight,
   ChevronDown,
@@ -61,7 +61,7 @@ export const VaccinesScreen: React.FC<VaccinesScreenProps> = ({
             className={`p-3 rounded-2xl border text-left transition-all ${
               selectedType === 'vacinacao'
                 ? 'bg-[#008779] border-[#008779] text-white shadow-md shadow-[#008779]/20'
-                : 'bg-white border-slate-100 text-slate-700 shadow-xs'
+                : 'bg-white border-slate-300 text-slate-700 shadow-xs hover:border-slate-400'
             }`}
           >
             <Syringe className={`w-5 h-5 mb-2 ${selectedType === 'vacinacao' ? 'text-white' : 'text-[#008779]'}`} />
@@ -76,10 +76,10 @@ export const VaccinesScreen: React.FC<VaccinesScreenProps> = ({
             className={`p-3 rounded-2xl border text-left transition-all ${
               selectedType === 'castracao'
                 ? 'bg-[#008779] border-[#008779] text-white shadow-md shadow-[#008779]/20'
-                : 'bg-white border-slate-100 text-slate-700 shadow-xs'
+                : 'bg-white border-slate-300 text-slate-700 shadow-xs hover:border-slate-400'
             }`}
           >
-            <Scissors className={`w-5 h-5 mb-2 ${selectedType === 'castracao' ? 'text-white' : 'text-[#008779]'}`} />
+            <ShieldCheck className={`w-5 h-5 mb-2 ${selectedType === 'castracao' ? 'text-white' : 'text-[#008779]'}`} />
             <h3 className="text-xs font-semibold">Castração</h3>
             <p className={`text-[10px] leading-tight mt-0.5 ${selectedType === 'castracao' ? 'text-teal-50' : 'text-slate-400'}`}>
               Programa gratuito

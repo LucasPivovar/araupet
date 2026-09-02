@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, PawPrint, X } from 'lucide-react';
+import { Camera, Check, PawPrint, X } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { Pet } from '../../types';
 
@@ -50,16 +50,19 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({
   const [gender, setGender] = useState<'Macho' | 'Fêmea'>('Macho');
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
-  const [photo, setPhoto] = useState(petAvatars.Cachorro[0]);
+  const [photo, setPhoto] = useState('');
 
   if (!isOpen) return null;
 
   const handlePetTypeChange = (selected: string) => {
     setPetType(selected);
-    const available = petAvatars[selected] || petAvatars.Outro;
-    if (available && available.length > 0) {
-      setPhoto(available[0]);
-    }
+  };
+
+  const handlePhotoFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setPhoto(URL.createObjectURL(file));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -78,7 +81,7 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({
       gender,
       age: age.trim() || '2 anos',
       weight: weight.trim() || '10 kg',
-      photo,
+      photo: photo || petAvatars[petType]?.[0] || petAvatars.Outro[0],
       tutorName,
       microchipped: true,
       neutered: true,
@@ -100,8 +103,6 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({
     setAge('');
     setWeight('');
   };
-
-  const currentAvatars = petAvatars[petType] || petAvatars.Outro;
 
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3">
@@ -129,29 +130,36 @@ export const AddPetModal: React.FC<AddPetModalProps> = ({
         <form onSubmit={handleSubmit} className="p-4 space-y-3.5 overflow-y-auto custom-scrollbar flex-1">
           {/* Photo Picker */}
           <div className="space-y-1">
-            <label className="text-xs font-medium text-slate-700 block">
-              Foto do Pet
-            </label>
-            <div className="flex items-center gap-2">
-              <img
-                src={photo}
-                alt="Preview"
-                className="w-12 h-12 rounded-xl object-cover ring-2 ring-[#008779]/30 shrink-0"
-              />
-              <div className="flex gap-1.5 overflow-x-auto py-1">
-                {currentAvatars.map((avatarUrl, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setPhoto(avatarUrl)}
-                    className={`relative rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                      photo === avatarUrl ? 'border-[#008779] scale-105' : 'border-transparent opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <img src={avatarUrl} alt="" className="w-9 h-9 object-cover" />
-                  </button>
-                ))}
-              </div>
+            <div className="space-y-2">
+              <label className="group relative flex min-h-[118px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-dashed border-teal-300 bg-teal-50/50 transition-all hover:bg-teal-50 active:scale-[0.99]">
+                {photo ? (
+                  <>
+                    <img
+                      src={photo}
+                      alt="Prévia da foto do pet"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/25 opacity-0 transition-opacity group-hover:opacity-100" />
+                    <div className="relative z-10 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-medium text-[#008779] shadow-sm opacity-0 transition-opacity group-hover:opacity-100">
+                      Trocar foto
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex flex-col items-center gap-2 text-center">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#008779] shadow-xs">
+                      <Camera className="h-5 w-5" />
+                    </div>
+                    <p className="text-xs font-medium text-[#008779]">Adicionar foto do pet</p>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={handlePhotoFileChange}
+                  className="hidden"
+                />
+              </label>
             </div>
           </div>
 

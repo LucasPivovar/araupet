@@ -13,10 +13,10 @@ export const PhoneFrame: React.FC<PhoneFrameProps> = ({
 }) => {
   return (
     <div
-      className={`relative mx-auto bg-white rounded-[44px] shadow-2xl border-[8px] border-slate-900 overflow-hidden flex flex-col transition-all duration-300 ${
+      className={`relative mx-auto bg-white rounded-[44px] shadow-2xl border-[8px] border-[#008779] overflow-hidden flex flex-col transition-all duration-300 ${
         isGalleryMode
-          ? 'w-[320px] h-[670px] shrink-0 shadow-xl ring-1 ring-slate-200'
-          : 'w-full max-w-[390px] h-[810px] shadow-2xl ring-1 ring-slate-800/10'
+          ? 'w-[320px] h-[670px] shrink-0 shadow-xl ring-2 ring-teal-100'
+          : 'w-full max-w-[390px] h-[810px] shadow-2xl ring-2 ring-teal-100'
       } ${className}`}
       style={{
         boxShadow: isGalleryMode

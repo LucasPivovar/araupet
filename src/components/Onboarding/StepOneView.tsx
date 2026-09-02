@@ -38,7 +38,7 @@ export const StepOneView: React.FC<StepOneViewProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-between py-1 animate-in fade-in slide-in-from-right-4 duration-200">
+    <div className="flex-1 flex flex-col py-1 animate-in fade-in slide-in-from-right-4 duration-200">
       {/* Stepper Header */}
       <div>
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -65,7 +65,7 @@ export const StepOneView: React.FC<StepOneViewProps> = ({
           </div>
         </div>
 
-        <div className="pt-4 space-y-1">
+        <div className="pt-4 space-y-1.5">
           <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-teal-50 text-[#008779] uppercase tracking-wider">
             Etapa 1 de 3 • Dados Pessoais
           </span>
@@ -78,8 +78,7 @@ export const StepOneView: React.FC<StepOneViewProps> = ({
         </div>
       </div>
 
-      {/* Form Fields */}
-      <form onSubmit={handleSubmit} className="space-y-4 my-auto py-2">
+      <form onSubmit={handleSubmit} className="space-y-4 pt-6">
         <div className="space-y-1">
           <label className="text-xs font-medium text-slate-700 block">
             Nome Completo *
@@ -124,7 +123,7 @@ export const StepOneView: React.FC<StepOneViewProps> = ({
         </button>
       </form>
 
-      <div className="text-center pb-2">
+      <div className="pt-4 text-center">
         <button
           type="button"
           onClick={onGoToLogin}

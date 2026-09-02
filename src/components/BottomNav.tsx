@@ -42,8 +42,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all ${
                 isWallet
                   ? isActive
-                    ? 'bg-[#008779] text-white shadow-md shadow-[#008779]/25'
-                    : 'bg-white border border-slate-200 text-slate-500 shadow-xs'
+                    ? 'bg-[#006e63] text-white shadow-md shadow-[#006e63]/30'
+                    : 'bg-slate-100 border border-slate-400 text-slate-700 shadow-xs'
                   : ''
               }`}
             >

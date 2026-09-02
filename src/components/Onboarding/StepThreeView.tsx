@@ -48,7 +48,7 @@ export const StepThreeView: React.FC<StepThreeViewProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-between py-1 animate-in fade-in slide-in-from-right-4 duration-200">
+    <div className="flex-1 flex flex-col py-1 animate-in fade-in slide-in-from-right-4 duration-200">
       {/* Stepper Header */}
       <div>
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -75,7 +75,7 @@ export const StepThreeView: React.FC<StepThreeViewProps> = ({
           </div>
         </div>
 
-        <div className="pt-3 space-y-1">
+        <div className="pt-4 space-y-1.5">
           <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-teal-50 text-[#008779] uppercase tracking-wider">
             Etapa 3 de 3 • Contato & Segurança
           </span>
@@ -88,8 +88,7 @@ export const StepThreeView: React.FC<StepThreeViewProps> = ({
         </div>
       </div>
 
-      {/* Form Fields */}
-      <form onSubmit={onSubmit} className="space-y-3 my-auto py-1">
+      <form onSubmit={onSubmit} className="space-y-3 pt-5">
         <div className="space-y-1">
           <label className="text-xs font-medium text-slate-700 block">
             Celular / WhatsApp *

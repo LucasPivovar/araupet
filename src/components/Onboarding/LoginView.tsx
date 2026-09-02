@@ -27,7 +27,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-between py-1 animate-in fade-in duration-300">
+    <div className="flex-1 flex flex-col py-1 animate-in fade-in duration-300">
       {/* Top Navigation */}
       <div className="flex items-center justify-between pb-3">
         <button
@@ -44,8 +44,7 @@ export const LoginView: React.FC<LoginViewProps> = ({
         </div>
       </div>
 
-      {/* Form */}
-      <div className="space-y-4 my-auto">
+      <div className="space-y-4 pt-16">
         <div className="space-y-1">
           <h2 className="text-xl font-bold text-slate-800">Bem-vindo(a) de volta!</h2>
           <p className="text-xs text-slate-500">
@@ -133,7 +132,6 @@ export const LoginView: React.FC<LoginViewProps> = ({
         </form>
       </div>
 
-      {/* Bottom Link */}
       <div className="pt-4 text-center">
         <button
           type="button"

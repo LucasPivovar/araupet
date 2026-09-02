@@ -45,8 +45,6 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
   const [cep, setCep] = useState('');
   const [street, setStreet] = useState('');
   const [neighborhood, setNeighborhood] = useState('Iguaçu');
-  const [number, setNumber] = useState('');
-  const [complement, setComplement] = useState('');
 
   // Step 3 state: Contato & Senha
   const [phone, setPhone] = useState('');
@@ -148,10 +146,6 @@ export const WelcomeLoginScreen: React.FC<WelcomeLoginScreenProps> = ({
             setStreet={setStreet}
             neighborhood={neighborhood}
             setNeighborhood={setNeighborhood}
-            number={number}
-            setNumber={setNumber}
-            complement={complement}
-            setComplement={setComplement}
             onNext={() => setMode('step-3')}
             onBack={() => setMode('step-1')}
           />

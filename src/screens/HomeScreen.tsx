@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { 
   Bell, 
   Syringe, 
-  Scissors, 
+  ShieldCheck, 
   Heart, 
   Search, 
   CreditCard, 
@@ -30,6 +30,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   currentUser = CURRENT_USER,
 }) => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [dragStartX, setDragStartX] = useState<number | null>(null);
 
   const heroSlides = [
     {
@@ -86,6 +87,27 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   const HeroIcon = hero.icon;
   const isTextRight = hero.textSide === 'right';
 
+  const goToSlide = (direction: 'previous' | 'next') => {
+    setActiveSlide((current) => {
+      if (direction === 'previous') {
+        return current === 0 ? heroSlides.length - 1 : current - 1;
+      }
+
+      return (current + 1) % heroSlides.length;
+    });
+  };
+
+  const handleSlideRelease = (clientX: number) => {
+    if (dragStartX === null) return;
+
+    const distance = clientX - dragStartX;
+    setDragStartX(null);
+
+    if (Math.abs(distance) < 36) return;
+
+    goToSlide(distance > 0 ? 'previous' : 'next');
+  };
+
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % heroSlides.length);
@@ -106,7 +128,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     {
       id: 'castracao',
       title: 'Castração',
-      icon: Scissors,
+      icon: ShieldCheck,
       bgColor: 'bg-[#effbf6]',
       iconColor: 'text-[#10b981]',
       screen: 'vaccines' as ScreenId,
@@ -189,8 +211,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
 
         {/* Main Hero Slider */}
         <div 
-          onClick={() => onNavigate(hero.screen)}
-          className="relative min-h-[178px] rounded-2xl overflow-hidden shadow-md shadow-[#008779]/20 cursor-pointer transform transition-all active:scale-[0.99] hover:shadow-lg"
+          onPointerDown={(event) => setDragStartX(event.clientX)}
+          onPointerUp={(event) => handleSlideRelease(event.clientX)}
+          onPointerCancel={() => setDragStartX(null)}
+          onPointerLeave={(event) => {
+            if (dragStartX !== null) handleSlideRelease(event.clientX);
+          }}
+          className="relative min-h-[178px] rounded-2xl overflow-hidden shadow-md shadow-[#008779]/20 cursor-grab touch-pan-y transition-all hover:shadow-lg active:cursor-grabbing"
         >
           {heroSlides.map((slide, index) => (
             <img

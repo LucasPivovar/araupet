@@ -11,7 +11,11 @@ import {
   Edit3,
   PawPrint,
   X,
-  Camera
+  Camera,
+  Mail,
+  Phone,
+  Lock,
+  Save
 } from 'lucide-react';
 import { CURRENT_USER } from '../data/mockData';
 import { TopBar } from '../components/TopBar';
@@ -41,6 +45,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
   const [petBreed, setPetBreed] = useState('');
   const [petSpecies, setPetSpecies] = useState<'dog' | 'cat'>('dog');
   const [petPhoto, setPetPhoto] = useState('');
+  const [accountEmail, setAccountEmail] = useState(currentUser.email);
+  const [accountPhone, setAccountPhone] = useState('(41) 99999-0000');
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   const defaultPetPhoto = petSpecies === 'dog'
     ? 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=300&auto=format&fit=crop&q=80'
@@ -89,42 +97,30 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
         onBack={onBack}
         showBack={true}
         darkIcons={true}
-        rightAction={
-          <button 
-            onClick={() => setActiveTab(activeTab === 'perfil' ? 'config' : 'perfil')}
-            className={`p-1.5 rounded-full transition-colors ${
-              activeTab === 'config' ? 'bg-[#008779] text-white' : 'text-slate-600 hover:text-slate-900'
-            }`}
-            title="Alternar Configurações"
-          >
-            <Settings className="w-5 h-5" />
-          </button>
-        }
       />
 
       {/* Main Content */}
       <div className="p-4 space-y-4">
         {/* Toggle Switch between Perfil and Configurações */}
-        <div className="flex p-1 bg-slate-200/70 rounded-xl">
+        <div className="flex p-1 bg-slate-200/70 rounded-xl border border-slate-300">
           <button
             onClick={() => setActiveTab('perfil')}
-            className={`flex-1 py-1.5 text-xs font-medium rounded-lg transition-all ${
+            className={`flex-1 py-1.5 text-xs font-medium rounded-lg border transition-all ${
               activeTab === 'perfil'
-                ? 'bg-[#008779] text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-[#008779] border-[#008779] text-white shadow-xs'
+                : 'border-slate-300 text-slate-600 hover:border-slate-400 hover:text-slate-900'
             }`}
           >
             Meu Perfil
           </button>
           <button
             onClick={() => setActiveTab('config')}
-            className={`flex-1 py-1.5 text-xs font-medium rounded-lg transition-all flex items-center justify-center gap-1.5 ${
+            className={`flex-1 py-1.5 text-xs font-medium rounded-lg border transition-all ${
               activeTab === 'config'
-                ? 'bg-[#008779] text-white shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-[#008779] border-[#008779] text-white shadow-xs'
+                : 'border-slate-300 text-slate-600 hover:border-slate-400 hover:text-slate-900'
             }`}
           >
-            <Settings className="w-3.5 h-3.5" />
             <span>Configurações</span>
           </button>
         </div>
@@ -245,6 +241,87 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
         ) : (
           /* Configurações Tab Content */
           <div className="space-y-4">
+            <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-3">
+              <div>
+                <h4 className="text-xs font-medium text-slate-800 flex items-center gap-1.5">
+                  <Edit3 className="w-4 h-4 text-[#008779]" />
+                  Dados da conta
+                </h4>
+                <p className="text-[10px] text-slate-400 font-normal mt-0.5">
+                  Atualize seus dados de acesso quando precisar.
+                </p>
+              </div>
+
+              <div className="space-y-2.5">
+                <label className="block space-y-1">
+                  <span className="text-[11px] font-medium text-slate-600">E-mail</span>
+                  <div className="relative">
+                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="email"
+                      value={accountEmail}
+                      onChange={(event) => setAccountEmail(event.target.value)}
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15"
+                    />
+                  </div>
+                </label>
+
+                <label className="block space-y-1">
+                  <span className="text-[11px] font-medium text-slate-600">Telefone</span>
+                  <div className="relative">
+                    <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="tel"
+                      value={accountPhone}
+                      onChange={(event) => setAccountPhone(event.target.value)}
+                      placeholder="(41) 99999-0000"
+                      className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15"
+                    />
+                  </div>
+                </label>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <label className="block space-y-1">
+                    <span className="text-[11px] font-medium text-slate-600">Senha atual</span>
+                    <div className="relative">
+                      <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                      <input
+                        type="password"
+                        value={currentPassword}
+                        onChange={(event) => setCurrentPassword(event.target.value)}
+                        placeholder="Atual"
+                        className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15"
+                      />
+                    </div>
+                  </label>
+
+                  <label className="block space-y-1">
+                    <span className="text-[11px] font-medium text-slate-600">Nova senha</span>
+                    <input
+                      type="password"
+                      value={newPassword}
+                      onChange={(event) => setNewPassword(event.target.value)}
+                      placeholder="Nova"
+                      className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white text-slate-800 focus:outline-none focus:border-[#008779] focus:ring-2 focus:ring-[#008779]/15"
+                    />
+                  </label>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCurrentPassword('');
+                    setNewPassword('');
+                    alert('Dados da conta atualizados!');
+                  }}
+                  className="w-full py-2.5 bg-[#008779] hover:bg-[#006e63] text-white rounded-xl font-medium text-xs shadow-md shadow-[#008779]/20 transition-all flex items-center justify-center gap-1.5 active:scale-[0.99]"
+                >
+                  <Save className="w-4 h-4" />
+                  <span>Salvar alterações</span>
+                </button>
+              </div>
+            </div>
+
             {/* Notificações Settings Card */}
             <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs space-y-3">
               <h4 className="text-xs font-medium text-slate-800 flex items-center gap-1.5">
@@ -360,7 +437,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({
 
             <form onSubmit={handleAddPet} className="p-5 space-y-3">
               <div>
-                <label className="text-xs font-medium text-slate-700 block mb-1.5">Foto do pet</label>
                 <label className="group relative flex min-h-[112px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-dashed border-teal-300 bg-teal-50/50 transition-all hover:bg-teal-50 active:scale-[0.99]">
                   {petPhoto ? (
                     <>

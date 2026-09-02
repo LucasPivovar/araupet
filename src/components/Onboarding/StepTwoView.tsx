@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowRight, ChevronLeft, MapPin, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, ChevronLeft, MapPin, ShieldCheck } from 'lucide-react';
 
 interface StepTwoViewProps {
   cpf: string;
@@ -10,10 +10,6 @@ interface StepTwoViewProps {
   setStreet: (val: string) => void;
   neighborhood: string;
   setNeighborhood: (val: string) => void;
-  number: string;
-  setNumber: (val: string) => void;
-  complement: string;
-  setComplement: (val: string) => void;
   onNext: () => void;
   onBack: () => void;
 }
@@ -27,15 +23,9 @@ export const StepTwoView: React.FC<StepTwoViewProps> = ({
   setStreet,
   neighborhood,
   setNeighborhood,
-  number,
-  setNumber,
-  complement,
-  setComplement,
   onNext,
   onBack,
 }) => {
-  const [autoAddressDetected, setAutoAddressDetected] = useState(false);
-
   const handleCpfChange = (val: string) => {
     const raw = val.replace(/\D/g, '').slice(0, 11);
     let formatted = raw;
@@ -47,15 +37,6 @@ export const StepTwoView: React.FC<StepTwoViewProps> = ({
       formatted = `${raw.slice(0, 3)}.${raw.slice(3)}`;
     }
     setCpf(formatted);
-
-    // Auto-detect address when CPF reaches 11 digits
-    if (raw.length === 11 && !autoAddressDetected) {
-      setAutoAddressDetected(true);
-      if (!cep) setCep('83702-040');
-      if (!street) setStreet('Rua das Araucárias');
-      if (!neighborhood) setNeighborhood('Iguaçu');
-      if (!number) setNumber('450');
-    }
   };
 
   const handleCepChange = (val: string) => {
@@ -79,7 +60,7 @@ export const StepTwoView: React.FC<StepTwoViewProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-between py-1 animate-in fade-in slide-in-from-right-4 duration-200">
+    <div className="flex-1 flex flex-col py-1 animate-in fade-in slide-in-from-right-4 duration-200">
       {/* Stepper Header */}
       <div>
         <div className="flex items-center justify-between pb-3 border-b border-slate-100">
@@ -106,21 +87,20 @@ export const StepTwoView: React.FC<StepTwoViewProps> = ({
           </div>
         </div>
 
-        <div className="pt-3 space-y-1">
+        <div className="pt-4 space-y-1.5">
           <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-teal-50 text-[#008779] uppercase tracking-wider">
             Etapa 2 de 3 • Documento & Localização
           </span>
           <h2 className="text-xl font-bold text-slate-800">
-            CPF e Endereço em Araucária
+            CPF, CEP e bairro
           </h2>
           <p className="text-xs text-slate-500 font-normal leading-relaxed">
-            Digite seu CPF para buscar os dados de endereço do município.
+            Informe seus dados para localizar campanhas e atendimentos próximos.
           </p>
         </div>
       </div>
 
-      {/* Form Fields */}
-      <form onSubmit={handleSubmit} className="space-y-3 my-auto py-1">
+      <form onSubmit={handleSubmit} className="space-y-3 pt-5">
         {/* CPF Input */}
         <div className="space-y-1">
           <label className="text-xs font-medium text-slate-700 block">
@@ -138,16 +118,6 @@ export const StepTwoView: React.FC<StepTwoViewProps> = ({
             />
           </div>
         </div>
-
-        {/* Automatic Detected Badge */}
-        {autoAddressDetected && (
-          <div className="p-2.5 rounded-xl bg-teal-50 border border-teal-200 flex items-center gap-2 text-xs text-slate-700 animate-in fade-in duration-200">
-            <CheckCircle2 className="w-4 h-4 text-[#008779] shrink-0" />
-            <span className="text-[11px] leading-tight">
-              <strong>Endereço localizado no cadastro municipal!</strong> Você pode conferir ou ajustar abaixo.
-            </span>
-          </div>
-        )}
 
         {/* CEP & Bairro */}
         <div className="grid grid-cols-2 gap-2">
@@ -200,35 +170,6 @@ export const StepTwoView: React.FC<StepTwoViewProps> = ({
               onChange={(e) => setStreet(e.target.value)}
               placeholder="Ex: Rua das Araucárias"
               className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#008779] font-normal"
-            />
-          </div>
-        </div>
-
-        {/* Número e Complemento */}
-        <div className="grid grid-cols-2 gap-2">
-          <div className="space-y-1">
-            <label className="text-xs font-medium text-slate-700 block">
-              Número *
-            </label>
-            <input
-              type="text"
-              required
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-              placeholder="Ex: 120"
-              className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#008779] font-normal"
-            />
-          </div>
-          <div className="space-y-1">
-            <label className="text-xs font-medium text-slate-700 block">
-              Complemento
-            </label>
-            <input
-              type="text"
-              value={complement}
-              onChange={(e) => setComplement(e.target.value)}
-              placeholder="Ex: Apto 302 / Bloco B"
-              className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#008779] font-normal"
             />
           </div>
         </div>

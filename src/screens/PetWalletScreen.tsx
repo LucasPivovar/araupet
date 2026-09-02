@@ -320,7 +320,6 @@ export const PetWalletScreen: React.FC<PetWalletScreenProps> = ({
 
             <form onSubmit={handleAddPet} className="p-5 space-y-3">
               <div>
-                <label className="text-xs font-medium text-slate-700 block mb-1.5">Foto do pet</label>
                 <label className="group relative flex min-h-[112px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-dashed border-teal-300 bg-teal-50/50 transition-all hover:bg-teal-50 active:scale-[0.99]">
                   {petPhoto ? (
                     <>
